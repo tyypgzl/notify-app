@@ -1,0 +1,4 @@
+bricks:
+  stilus:
+    path: /Users/tayyipguzel/Desktop/dev/stilus/bricks/stilus/
+  feature_brick: ^0.6.1

@@ -1,0 +1,22 @@
+name: app_ui
+description: App UI Packages
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: 3.10.1
+
+dependencies:
+  easy_logger: 0.0.2
+
+  flutter:
+    sdk: flutter
+
+  font_awesome_flutter: ^10.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: 0.3.0
+  very_good_analysis: ^5.0.0+1

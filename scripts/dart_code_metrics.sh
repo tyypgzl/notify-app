@@ -1,0 +1,1 @@
+fvm flutter run dart_code_metrics:metrics analyze lib
