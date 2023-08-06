@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:notify/config/locator/service_locator.dart';
 import 'package:notify/config/router/app_router.dart';
+import 'package:notify/utils/locator/service_locator.dart';
 
-class OnboardCubit extends Cubit<int> {
+final class OnboardCubit extends Cubit<int> {
   OnboardCubit() : super(0);
 
   final pageController = PageController();

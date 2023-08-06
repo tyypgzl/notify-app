@@ -5,7 +5,7 @@ import 'package:notify/presentation/authentication/register/widgets/register_bod
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
-class RegisterView extends StatelessWidget {
+final class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
   @override

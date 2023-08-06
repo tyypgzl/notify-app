@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/config/locator/service_locator.dart';
 import 'package:notify/config/router/app_router.dart';
+import 'package:notify/utils/locator/service_locator.dart';
 
 part 'register_event.dart';
-
 part 'register_state.dart';
 
-class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(RegisterInitial()) {
+final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
+  RegisterBloc() : super(const RegisterState.init()) {
     on<RegisterButtonPressed>(_onRegisterButtonPressed);
     on<AlreadyHaveAnAccountButtonPressed>(_onAlreadyHaveAnAccountButtonPressed);
   }

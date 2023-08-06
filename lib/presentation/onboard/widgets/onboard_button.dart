@@ -11,7 +11,7 @@ enum OnboardButtonType {
 }
 
 @immutable
-class OnboardButton extends StatelessWidget {
+final class OnboardButton extends StatelessWidget {
   const OnboardButton({
     super.key,
     required this.onboardButtonType,

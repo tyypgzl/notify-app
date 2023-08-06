@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notify/utils/enum/flavor.dart';
 
-class FlavorConfig extends InheritedWidget {
+final class FlavorConfig extends InheritedWidget {
   const FlavorConfig({
     super.key,
     required super.child,

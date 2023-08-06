@@ -6,7 +6,7 @@ import 'package:notify/utils/extensions/extensions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @immutable
-class OnboardView extends StatelessWidget {
+final class OnboardView extends StatelessWidget {
   const OnboardView({super.key});
 
   @override

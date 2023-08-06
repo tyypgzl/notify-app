@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/authentication/login/login.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
-class LoginBody extends StatelessWidget {
+final class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
 
   @override
@@ -13,7 +13,7 @@ class LoginBody extends StatelessWidget {
     return Form(
       key: loginBloc.formKey,
       child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const RangeMaintainingScrollPhysics(),
         child: SizedBox(
           width: context.width,
           height: context.height -

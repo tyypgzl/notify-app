@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:notify/presentation/authentication/login/login.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
-class LoginView extends StatelessWidget {
+final class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override

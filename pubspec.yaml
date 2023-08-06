@@ -49,9 +49,6 @@ dependencies:
   app_ui:
     path: packages/app_ui/
 
-#  form_input:
-#    path: packages/form_input/
-
 
 dev_dependencies:
   flutter_test:

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/authentication/login/login.dart';
 
 @RoutePage()
-class LoginPage extends StatelessWidget {
+final class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   static const name = '/login';

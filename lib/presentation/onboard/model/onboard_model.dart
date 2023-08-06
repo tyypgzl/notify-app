@@ -1,4 +1,4 @@
-class OnboardModel {
+final class OnboardModel {
   OnboardModel({
     required this.assetsPath,
     required this.title,

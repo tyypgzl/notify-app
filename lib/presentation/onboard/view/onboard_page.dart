@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/onboard/onboard.dart';
 
 @RoutePage()
-class OnboardPage extends StatelessWidget {
+final class OnboardPage extends StatelessWidget {
   const OnboardPage({super.key});
 
   static const name = '/onboard';

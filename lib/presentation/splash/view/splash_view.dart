@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/splash/splash.dart';
 
 @immutable
-class SplashView extends StatefulWidget {
+final class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
   @override

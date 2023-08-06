@@ -1,6 +1,6 @@
 part of 'login_bloc.dart';
 
-class LoginState extends Equatable {
+final class LoginState extends Equatable {
   const LoginState();
 
   const LoginState.init() : this();

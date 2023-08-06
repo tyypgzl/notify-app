@@ -5,7 +5,7 @@ import 'package:notify/presentation/authentication/register/register.dart';
 
 @RoutePage()
 @immutable
-class RegisterPage extends StatelessWidget {
+final class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   static const name = '/register';

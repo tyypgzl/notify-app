@@ -5,7 +5,7 @@ import 'package:notify/presentation/splash/splash.dart';
 
 @RoutePage()
 @immutable
-class SplashPage extends StatelessWidget {
+final class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   static const name = '/';

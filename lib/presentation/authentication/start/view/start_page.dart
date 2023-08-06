@@ -6,7 +6,7 @@ import 'package:notify/utils/extensions/extensions.dart';
 
 @RoutePage()
 @immutable
-class StartPage extends StatelessWidget {
+final class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
   static const name = '/start';

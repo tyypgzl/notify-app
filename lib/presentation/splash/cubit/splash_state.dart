@@ -1,6 +1,6 @@
 part of 'splash_cubit.dart';
 
-class SplashState extends Equatable {
+final class SplashState extends Equatable {
   const SplashState();
 
   const SplashState.init() : this();

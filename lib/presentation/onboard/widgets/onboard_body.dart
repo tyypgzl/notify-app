@@ -3,7 +3,7 @@ import 'package:notify/presentation/onboard/model/onboard_model.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
-class OnboardBody extends StatelessWidget {
+final class OnboardBody extends StatelessWidget {
   const OnboardBody({
     super.key,
     required this.onboardModel,

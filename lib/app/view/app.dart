@@ -7,8 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/app/observer/router_observer.dart';
 import 'package:notify/config/generated/fonts.gen.dart';
-import 'package:notify/config/locator/service_locator.dart';
 import 'package:notify/config/router/app_router.dart';
+import 'package:notify/utils/locator/service_locator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class App extends StatefulWidget {

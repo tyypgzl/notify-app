@@ -1,10 +1,10 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState extends Equatable {
+final class RegisterState extends Equatable {
   const RegisterState();
-}
 
-class RegisterInitial extends RegisterState {
+  const RegisterState.init() : this();
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }

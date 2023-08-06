@@ -8,9 +8,9 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/app/observer/bloc_observer.dart';
 import 'package:notify/app/view/app.dart';
-import 'package:notify/config/flavor/flavor_config.dart';
-import 'package:notify/config/locator/service_locator.dart';
 import 'package:notify/utils/enum/flavor.dart';
+import 'package:notify/utils/flavor/flavor_config.dart';
+import 'package:notify/utils/locator/service_locator.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> bootstrap(Flavor flavor) async {

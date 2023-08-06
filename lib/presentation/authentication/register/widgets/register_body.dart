@@ -5,7 +5,7 @@ import 'package:notify/presentation/authentication/register/register.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
-class RegisterBody extends StatelessWidget {
+final class RegisterBody extends StatelessWidget {
   const RegisterBody({super.key});
 
   @override
@@ -14,7 +14,7 @@ class RegisterBody extends StatelessWidget {
     return Form(
       key: registerBloc.formKey,
       child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const RangeMaintainingScrollPhysics(),
         child: SizedBox(
           width: context.width,
           height: context.height -
