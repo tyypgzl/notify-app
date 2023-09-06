@@ -5,10 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
-import 'package:notify/app/observer/router_observer.dart';
-import 'package:notify/config/generated/fonts.gen.dart';
-import 'package:notify/config/router/app_router.dart';
-import 'package:notify/utils/locator/service_locator.dart';
+import 'package:notify/utils/generated/fonts.gen.dart';
+import 'package:notify/utils/router/app_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class App extends StatefulWidget {
@@ -20,7 +18,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> with WidgetsBindingObserver {
   AppLifecycleState? state;
-  final _appRouter = getIt<AppRouter>();
 
   @override
   void initState() {
@@ -57,12 +54,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              routerDelegate: _appRouter.delegate(
-                navigatorObservers: () => [
-                  AppRouterObserver(),
-                ],
-              ),
-              routeInformationParser: _appRouter.defaultRouteParser(),
+              routerConfig: AppRouter.goRouter,
               themeMode: appState.themeMode,
               theme: FlexThemeData.light(
                 scheme: FlexScheme.brandBlue,

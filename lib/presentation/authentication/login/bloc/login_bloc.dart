@@ -3,22 +3,24 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/config/router/app_router.dart';
-import 'package:notify/utils/locator/service_locator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notify/presentation/authentication/register/register.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 final class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const LoginState.init()) {
+  LoginBloc(GoRouter router)
+      : _router = router,
+        super(const LoginState.init()) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
     on<ForgotPasswordButtonPressed>(_onForgotPasswordButtonPressed);
     on<DontHaveAnAccountButtonPressed>(_onDontHaveAnAccountButtonPressed);
   }
 
+  final GoRouter _router;
   final formKey = GlobalKey<FormState>();
-
-  final _router = getIt<AppRouter>();
 
   FutureOr<void> _onLoginButtonPressed(
     LoginButtonPressed event,
@@ -28,7 +30,7 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
     formKey.currentState?.validate();
 
     try {
-      // async func to auth repo
+// async func to auth repo
     } catch (error, stacktrace) {
       addError(error, stacktrace);
     }
@@ -43,6 +45,6 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
     DontHaveAnAccountButtonPressed event,
     Emitter<LoginState> emit,
   ) {
-    _router.replace(const RegisterRoute());
+    _router.pushReplacement(RegisterPage.location);
   }
 }

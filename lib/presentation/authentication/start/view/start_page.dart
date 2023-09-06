@@ -1,19 +1,27 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/config/router/app_router.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notify/presentation/authentication/login/login.dart';
+import 'package:notify/presentation/authentication/register/register.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
-@RoutePage()
 @immutable
 final class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
-  static const name = '/start';
+  static const location = '/start';
+  static const name = 'start';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 0,
+        toolbarOpacity: 0,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -48,7 +56,7 @@ final class StartPage extends StatelessWidget {
               AuthButton.text(
                 title: context.l10n.startLogin,
                 onPressed: () {
-                  context.navigateTo(const LoginRoute());
+                  context.push(LoginPage.location);
                 },
               ),
               const Spacer(),
@@ -57,7 +65,7 @@ final class StartPage extends StatelessWidget {
                 title: context.l10n.startCreateAccount,
                 foregroundColor: context.colorScheme.onTertiaryContainer,
                 onPressed: () {
-                  context.navigateTo(const RegisterRoute());
+                  context.push(RegisterPage.location);
                 },
               ),
               const Spacer(

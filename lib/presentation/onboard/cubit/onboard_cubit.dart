@@ -1,13 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:notify/config/router/app_router.dart';
-import 'package:notify/utils/locator/service_locator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notify/data/repositories/auth/auth.dart';
+import 'package:notify/presentation/authentication/start/view/start_page.dart';
 
 final class OnboardCubit extends Cubit<int> {
-  OnboardCubit() : super(0);
+  OnboardCubit({
+    required GoRouter router,
+    required IAuthRepository authRepository,
+  })  : _router = router,
+        _authRepository = authRepository,
+        super(0);
+
+  final GoRouter _router;
+  final IAuthRepository _authRepository;
 
   final pageController = PageController();
-  final _router = getIt<AppRouter>();
 
   void onPageChanged(int value) => emit(value);
 
@@ -22,7 +30,7 @@ final class OnboardCubit extends Cubit<int> {
 
   Future<void> nextButtonPressed() async {
     if (state == 2) {
-      _navigate();
+      await _navigate();
     } else {
       await pageController.nextPage(
         duration: const Duration(milliseconds: 200),
@@ -31,7 +39,8 @@ final class OnboardCubit extends Cubit<int> {
     }
   }
 
-  void _navigate() {
-    _router.push(const StartRoute());
+  Future<void> _navigate() async {
+    _router.go(StartPage.location);
+    await _authRepository.saveOnboardStatusToDone();
   }
 }

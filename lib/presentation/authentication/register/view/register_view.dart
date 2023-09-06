@@ -1,7 +1,6 @@
-import 'package:app_ui/app_ui.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/presentation/authentication/register/widgets/register_body.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notify/presentation/authentication/register/register.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
@@ -10,20 +9,32 @@ final class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: context.colorScheme.background,
-        leading: AdaptiveIconButton(
-          icon: Icons.arrow_back_ios_new,
-          color: context.colorScheme.onBackground,
-          onPressed: () {
-            context.router.back();
-          },
+    final registerBloc = context.read<RegisterBloc>();
+    return Form(
+      key: registerBloc.formKey,
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: ConstrainedBox(
+          constraints: BoxConstraints.expand(
+            height: context.height,
+            width: context.width,
+          ),
+          child: const Column(
+            children: [
+              Spacer(flex: 2),
+              RegisterTitle(),
+              Spacer(flex: 3),
+              EmailTextField(),
+              Spacer(flex: 2),
+              PasswordTextField(),
+              Spacer(flex: 3),
+              RegisterButton(),
+              Spacer(),
+              AlreadyHaveAccountButton(),
+              Spacer(flex: 7),
+            ],
+          ),
         ),
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(12),
-        child: RegisterBody(),
       ),
     );
   }

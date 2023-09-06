@@ -8,10 +8,15 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/app/observer/bloc_observer.dart';
 import 'package:notify/app/view/app.dart';
+import 'package:notify/data/repositories/auth/auth.dart';
+import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/enum/flavor.dart';
 import 'package:notify/utils/flavor/flavor_config.dart';
 import 'package:notify/utils/locator/service_locator.dart';
+import 'package:notify/utils/storage/persistent_storage.dart';
+import 'package:notify/utils/storage/secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> bootstrap(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,24 +27,36 @@ Future<void> bootstrap(Flavor flavor) async {
       DeviceOrientation.portraitDown,
     ],
   );
+  final sharedPreferences = await SharedPreferences.getInstance();
   final directory = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: directory,
   );
 
-  setUp();
+  setUp(sharedPreferences: sharedPreferences);
   AppLogger.getInstance();
   Bloc.observer = AppBlocObserver();
   runApp(
-    FlavorConfig(
-      flavor: flavor,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AppCubit>(
-            create: (context) => AppCubit(),
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<IAuthRepository>(
+          create: (context) => AuthRepository(
+            authService: AuthService(),
+            persistentStorage: getIt<PersistentStorage>(),
+            secureStorage: getIt<SecureStorage>(),
           ),
-        ],
-        child: const App(),
+        ),
+      ],
+      child: FlavorConfig(
+        flavor: flavor,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AppCubit>(
+              create: (context) => AppCubit(),
+            ),
+          ],
+          child: const App(),
+        ),
       ),
     ),
   );

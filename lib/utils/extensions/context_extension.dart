@@ -6,23 +6,29 @@ extension AppLocalizationsX on BuildContext {
 }
 
 extension ContextX on BuildContext {
-  MediaQueryData get mediaQuery => MediaQuery.of(this);
-
   TextTheme get textTheme => Theme.of(this).textTheme;
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
+  EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
+
+  double get viewPaddingTop => MediaQuery.viewPaddingOf(this).top;
+
+  double get viewPaddingBottom => MediaQuery.viewPaddingOf(this).bottom;
+
+  double get viewPaddingVertical => MediaQuery.viewPaddingOf(this).vertical;
+
   ThemeData get appTheme => Theme.of(this);
 
-  Brightness get appBrightness => MediaQuery.of(this).platformBrightness;
+  Brightness get appBrightness => MediaQuery.platformBrightnessOf(this);
 
-  double get textScaleFactor => MediaQuery.of(this).textScaleFactor;
+  double get textScaleFactor => MediaQuery.textScaleFactorOf(this);
 }
 
 extension MediaQueryX on BuildContext {
-  double get height => mediaQuery.size.height;
+  double get height => MediaQuery.sizeOf(this).height;
 
-  double get width => mediaQuery.size.width;
+  double get width => MediaQuery.sizeOf(this).width;
 
   double dynamicWidth(double val) => width * val;
 

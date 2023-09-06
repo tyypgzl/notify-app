@@ -3,20 +3,23 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/config/router/app_router.dart';
-import 'package:notify/utils/locator/service_locator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notify/presentation/authentication/login/login.dart';
 
 part 'register_event.dart';
+
 part 'register_state.dart';
 
 final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(const RegisterState.init()) {
+  RegisterBloc(GoRouter router)
+      : _router = router,
+        super(const RegisterState.init()) {
     on<RegisterButtonPressed>(_onRegisterButtonPressed);
     on<AlreadyHaveAnAccountButtonPressed>(_onAlreadyHaveAnAccountButtonPressed);
   }
 
+  final GoRouter _router;
   final formKey = GlobalKey<FormState>();
-  final _router = getIt<AppRouter>();
 
   FutureOr<void> _onRegisterButtonPressed(
     RegisterButtonPressed event,
@@ -27,6 +30,6 @@ final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     AlreadyHaveAnAccountButtonPressed event,
     Emitter<RegisterState> emit,
   ) {
-    _router.replace(const LoginRoute());
+    _router.pushReplacement(LoginPage.location);
   }
 }

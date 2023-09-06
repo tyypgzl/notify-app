@@ -210,7 +210,7 @@ class _AuthTextFieldState extends State<AuthTextField> with ValidationMixin {
           ),
           obscureText: authTextFieldType == _AuthTextFieldType.password &&
               !passwordVisibility,
-        )
+        ),
       ],
     );
   }
