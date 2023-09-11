@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:app_ui/src/generated/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 @immutable
 class LoadingWidget extends StatelessWidget {
@@ -8,12 +10,10 @@ class LoadingWidget extends StatelessWidget {
     super.key,
     required this.child,
     required this.isLoading,
-    required this.loadingWidget,
   });
 
   final Widget child;
   final bool isLoading;
-  final Widget loadingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,20 @@ class LoadingWidget extends StatelessWidget {
               duration: const Duration(milliseconds: 250),
               child: isLoading
                   ? ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                  child: RepaintBoundary(
-                    child: loadingWidget,
-                  ),
-                ),
-              )
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                        child: RepaintBoundary(
+                          child: Center(
+                            child: Lottie.asset(
+                              Assets.animations.lotLoading,
+                              height: 150,
+                              width: 150,
+                              package: 'app_ui',
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
                   : const SizedBox.shrink(),
             ),
           ),

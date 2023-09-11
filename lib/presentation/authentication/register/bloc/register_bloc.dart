@@ -4,10 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notify/presentation/authentication/login/login.dart';
+import 'package:notify/utils/router/router.dart';
 
 part 'register_event.dart';
-
 part 'register_state.dart';
 
 final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
@@ -30,6 +29,6 @@ final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     AlreadyHaveAnAccountButtonPressed event,
     Emitter<RegisterState> emit,
   ) {
-    _router.pushReplacement(LoginPage.location);
+    _router.pushReplacement(AppRoutes.login.location);
   }
 }

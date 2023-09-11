@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-final class StorageException implements Exception {
-  const StorageException(this.error);
+final class SecureStorageException implements Exception {
+  const SecureStorageException(this.error);
 
   final Object error;
 }
@@ -17,7 +17,7 @@ final class SecureStorage {
       final result = await _secureStorage.read(key: key);
       return result;
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 
@@ -25,7 +25,7 @@ final class SecureStorage {
     try {
       await _secureStorage.write(key: key, value: value);
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 
@@ -33,7 +33,7 @@ final class SecureStorage {
     try {
       await _secureStorage.delete(key: key);
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 
@@ -41,7 +41,7 @@ final class SecureStorage {
     try {
       await _secureStorage.deleteAll();
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 
@@ -49,7 +49,7 @@ final class SecureStorage {
     try {
       return await _secureStorage.readAll();
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 
@@ -57,7 +57,7 @@ final class SecureStorage {
     try {
       return await _secureStorage.containsKey(key: key);
     } on Exception catch (error, stackTrace) {
-      Error.throwWithStackTrace(StorageException(error), stackTrace);
+      Error.throwWithStackTrace(SecureStorageException(error), stackTrace);
     }
   }
 }

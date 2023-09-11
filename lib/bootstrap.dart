@@ -8,6 +8,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/app/observer/bloc_observer.dart';
 import 'package:notify/app/view/app.dart';
+import 'package:notify/core/client/cookie_client.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
 import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/enum/flavor.dart';
@@ -41,7 +42,9 @@ Future<void> bootstrap(Flavor flavor) async {
       providers: [
         RepositoryProvider<IAuthRepository>(
           create: (context) => AuthRepository(
-            authService: AuthService(),
+            authService: AuthService(
+              client: getIt<CookieClient>(),
+            ),
             persistentStorage: getIt<PersistentStorage>(),
             secureStorage: getIt<SecureStorage>(),
           ),

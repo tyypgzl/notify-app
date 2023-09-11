@@ -1,4 +1,6 @@
-import 'package:notify/data/exception/notify_exception.dart';
+import 'package:notify/core/client/utils/exception.dart';
+import 'package:notify/core/exception/notify_exception.dart';
+import 'package:notify/data/models/auth/login/login.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
 import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/constants/constants.dart';
@@ -19,8 +21,21 @@ final class AuthRepository implements IAuthRepository {
   final IAuthService _authService;
 
   @override
-  Future<void> login() {
-    throw UnimplementedError();
+  Future<LoginResponse?> login(LoginRequest request) async {
+    try {
+      final result = await _authService.login(request);
+      return result;
+    } on CookieException catch (err, stackTrace) {
+      Error.throwWithStackTrace(
+        NotifyException(
+          type: ExceptionType.other,
+          statusCode: err.statusCode,
+          message: err.message,
+          stackTrace: err.stackTrace,
+        ),
+        stackTrace,
+      );
+    }
   }
 
   @override
@@ -46,6 +61,36 @@ final class AuthRepository implements IAuthRepository {
         value: 'done',
       );
     } on PersistentStorageException catch (err, stackTrace) {
+      final error = NotifyException(
+        type: ExceptionType.storage,
+        message: err.error.toString(),
+      );
+      Error.throwWithStackTrace(error, stackTrace);
+    }
+  }
+
+  @override
+  Future<String?> readAccessToken() async {
+    try {
+      final result = await _secureStorage.read(key: ConstStorage.accessToken);
+      return result;
+    } on SecureStorageException catch (err, stackTrace) {
+      final error = NotifyException(
+        type: ExceptionType.storage,
+        message: err.error.toString(),
+      );
+      Error.throwWithStackTrace(error, stackTrace);
+    }
+  }
+
+  @override
+  Future<void> saveAccessToken(String? accessToken) async {
+    try {
+      await _secureStorage.write(
+        key: ConstStorage.accessToken,
+        value: accessToken,
+      );
+    } on SecureStorageException catch (err, stackTrace) {
       final error = NotifyException(
         type: ExceptionType.storage,
         message: err.error.toString(),

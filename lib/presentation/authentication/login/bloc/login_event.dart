@@ -24,3 +24,8 @@ final class DontHaveAnAccountButtonPressed extends LoginEvent {
   @override
   List<Object?> get props => [];
 }
+
+final class ResetLoginSnackBar extends LoginEvent {
+  @override
+  List<Object?> get props => [];
+}

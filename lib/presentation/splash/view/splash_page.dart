@@ -8,9 +8,6 @@ import 'package:notify/presentation/splash/splash.dart';
 final class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
-  static const location = '/';
-  static const name = 'splash';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

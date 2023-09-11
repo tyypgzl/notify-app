@@ -1,8 +1,8 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/onboard/onboard.dart';
 import 'package:notify/utils/extensions/extensions.dart';
-import 'package:notify/utils/generated/assets.gen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @immutable

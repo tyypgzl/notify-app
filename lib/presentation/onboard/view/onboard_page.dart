@@ -7,9 +7,6 @@ import 'package:notify/presentation/onboard/onboard.dart';
 final class OnboardPage extends StatelessWidget {
   const OnboardPage({super.key});
 
-  static const location = '/onboard';
-  static const name = 'onboard';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

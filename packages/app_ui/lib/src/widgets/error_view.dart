@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class ErrorWidget extends StatelessWidget {
-  const ErrorWidget({
+class ErrorView extends StatelessWidget {
+  const ErrorView({
     super.key,
     required this.message,
     this.stackTrace,

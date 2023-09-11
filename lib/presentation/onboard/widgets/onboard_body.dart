@@ -20,6 +20,7 @@ final class OnboardBody extends StatelessWidget {
           onboardModel.assetsPath,
           width: context.width,
           height: context.height / 2,
+          package: 'app_ui',
         ),
         const Spacer(),
         Padding(

@@ -1,11 +1,11 @@
-import 'package:app_ui/app_ui.dart' as app_ui;
+import 'package:app_ui/app_ui.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
-import 'package:notify/utils/generated/fonts.gen.dart';
+import 'package:notify/utils/extensions/context_extension.dart';
 import 'package:notify/utils/router/app_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -28,7 +28,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     this.state = state;
-    app_ui.AppLogger.logInfo('LifeCycle: $state');
+    AppLogger.logInfo('LifeCycle: $state');
   }
 
   @override
@@ -45,7 +45,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           builder: (context, orientation, screenType) {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              title: app_ui.AppConstants.name,
+              title: AppConstants.name,
               supportedLocales: AppLocalizations.supportedLocales,
               locale: appState.locale,
               localizationsDelegates: const [
@@ -76,8 +76,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 ),
               ),
               builder: (BuildContext context, Widget? widget) {
+                print('---');
+                print(context.colorScheme.primary);
+                print(context.colorScheme.secondary);
+                print(context.colorScheme.tertiary);
                 ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-                  return app_ui.ErrorWidget(
+                  return ErrorView(
                     message: errorDetails.toString(),
                     stackTrace: errorDetails.stack,
                   );

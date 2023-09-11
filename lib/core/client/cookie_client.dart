@@ -3,7 +3,7 @@
 import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/client/utils/utils.dart';
+import 'package:notify/core/client/utils/utils.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 enum HttpMethod { GET, POST, DELETE, PUT, PATCH }
@@ -75,23 +75,28 @@ class CookieClient {
     Map<String, dynamic>? headers,
     String contentType = Headers.jsonContentType,
   }) async {
-    final dioResponse = await _dio.post<Map<String, dynamic>>(
-      path,
-      queryParameters: queryParameters,
-      data: data,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.POST.name,
-      ),
-      cancelToken: cancelToken,
-      onReceiveProgress: onReceiveProgress,
-      onSendProgress: onSendProgress,
-    );
+    try {
+      final dioResponse = await _dio.post<Map<String, dynamic>>(
+        path,
+        queryParameters: queryParameters,
+        data: data,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.POST.name,
+        ),
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+        onSendProgress: onSendProgress,
+      );
 
-    final result = _convertToGenericType<R, K>(dioResponse, responseModel);
-    return result;
+      final result = _convertToGenericType<R, K>(dioResponse, responseModel);
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   ///Handy method to make [HttpMethod.GET] request.
@@ -106,20 +111,25 @@ class CookieClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
-    final dioResponse = await _dio.get<String>(
-      path,
-      queryParameters: queryParameters,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.GET.name,
-      ),
-      onReceiveProgress: onReceiveProgress,
-      cancelToken: cancelToken,
-    );
+    try {
+      final dioResponse = await _dio.get<String>(
+        path,
+        queryParameters: queryParameters,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.GET.name,
+        ),
+        onReceiveProgress: onReceiveProgress,
+        cancelToken: cancelToken,
+      );
 
-    return dioResponse.data;
+      return dioResponse.data;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   ///Handy method to make [HttpMethod.GET] request.
@@ -135,21 +145,26 @@ class CookieClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
-    final dioResponse = await _dio.get<Map<String, dynamic>>(
-      path,
-      queryParameters: queryParameters,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.GET.name,
-      ),
-      onReceiveProgress: onReceiveProgress,
-      cancelToken: cancelToken,
-    );
+    try {
+      final dioResponse = await _dio.get<Map<String, dynamic>>(
+        path,
+        queryParameters: queryParameters,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.GET.name,
+        ),
+        onReceiveProgress: onReceiveProgress,
+        cancelToken: cancelToken,
+      );
 
-    final result = _convertToGenericType<R, K>(dioResponse, responseModel);
-    return result;
+      final result = _convertToGenericType<R, K>(dioResponse, responseModel);
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   ///Handy method to make [HttpMethod.DELETE] request.
@@ -164,21 +179,26 @@ class CookieClient {
     ResponseType responseType = ResponseType.json,
     CancelToken? cancelToken,
   }) async {
-    final dioResponse = await _dio.delete<Map<String, dynamic>>(
-      path,
-      queryParameters: queryParameters,
-      data: data,
-      cancelToken: cancelToken,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.DELETE.name,
-      ),
-    );
+    try {
+      final dioResponse = await _dio.delete<Map<String, dynamic>>(
+        path,
+        queryParameters: queryParameters,
+        data: data,
+        cancelToken: cancelToken,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.DELETE.name,
+        ),
+      );
 
-    final result = _convertToGenericType<R, K>(dioResponse, responseModel);
-    return result;
+      final result = _convertToGenericType<R, K>(dioResponse, responseModel);
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   ///Handy method to make [HttpMethod.PUT] request.
@@ -195,23 +215,28 @@ class CookieClient {
     Map<String, dynamic>? headers,
     String contentType = Headers.jsonContentType,
   }) async {
-    final dioResponse = await _dio.put<Map<String, dynamic>>(
-      path,
-      queryParameters: queryParameters,
-      data: data,
-      cancelToken: cancelToken,
-      onReceiveProgress: onSendProgress,
-      onSendProgress: onSendProgress,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.PUT.name,
-      ),
-    );
+    try {
+      final dioResponse = await _dio.put<Map<String, dynamic>>(
+        path,
+        queryParameters: queryParameters,
+        data: data,
+        cancelToken: cancelToken,
+        onReceiveProgress: onSendProgress,
+        onSendProgress: onSendProgress,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.PUT.name,
+        ),
+      );
 
-    final result = _convertToGenericType<R, K>(dioResponse, responseModel);
-    return result;
+      final result = _convertToGenericType<R, K>(dioResponse, responseModel);
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   ///Handy method to make [HttpMethod.PATCH] request.
@@ -228,23 +253,28 @@ class CookieClient {
     Map<String, dynamic>? headers,
     String contentType = Headers.jsonContentType,
   }) async {
-    final dioResponse = await _dio.patch<Map<String, dynamic>>(
-      path,
-      queryParameters: queryParameters,
-      data: data,
-      cancelToken: cancelToken,
-      onReceiveProgress: onSendProgress,
-      onSendProgress: onSendProgress,
-      options: Options(
-        responseType: responseType,
-        headers: headers,
-        contentType: contentType,
-        method: HttpMethod.PATCH.name,
-      ),
-    );
+    try {
+      final dioResponse = await _dio.patch<Map<String, dynamic>>(
+        path,
+        queryParameters: queryParameters,
+        data: data,
+        cancelToken: cancelToken,
+        onReceiveProgress: onSendProgress,
+        onSendProgress: onSendProgress,
+        options: Options(
+          responseType: responseType,
+          headers: headers,
+          contentType: contentType,
+          method: HttpMethod.PATCH.name,
+        ),
+      );
 
-    final result = _convertToGenericType<R, K>(dioResponse, responseModel);
-    return result;
+      final result = _convertToGenericType<R, K>(dioResponse, responseModel);
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   Future<Response<dynamic>> download({
@@ -256,18 +286,23 @@ class CookieClient {
     CancelToken? cancelToken,
     ResponseType responseType = ResponseType.bytes,
   }) async {
-    final result = await _dio.download(
-      urlPath,
-      filePath,
-      onReceiveProgress: onReceiveProgress,
-      data: data,
-      deleteOnError: deleteOnError,
-      cancelToken: cancelToken,
-      options: Options(
-        responseType: responseType,
-      ),
-    );
-    return result;
+    try {
+      final result = await _dio.download(
+        urlPath,
+        filePath,
+        onReceiveProgress: onReceiveProgress,
+        data: data,
+        deleteOnError: deleteOnError,
+        cancelToken: cancelToken,
+        options: Options(
+          responseType: responseType,
+        ),
+      );
+      return result;
+    } on DioException catch (err, stackTrace) {
+      final error = err.toException();
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   K _convertToGenericType<R extends CookieModel<Object>, K>(
@@ -294,13 +329,18 @@ class CookieClient {
           return typedModel;
         }
       } else {
-        throw StatusException(
-          status: dioResponse.statusCode,
-          error: dioResponse.statusMessage,
+        throw BadResponseException(
+          message: dioResponse.statusMessage ?? 'Bad Response',
+          error: 'Status code: ${dioResponse.statusCode}}',
+          statusCode: dioResponse.statusCode ?? -1,
         );
       }
-    } catch (error) {
-      throw JsonParseException(error: error.toString());
+    } catch (error, stackTrace) {
+      throw JsonParseException(
+        error: error,
+        message: 'Json Parse Error on Cookie Client',
+        stackTrace: stackTrace,
+      );
     }
   }
 }

@@ -8,6 +8,15 @@ final class CookieLogger {
     this.responseBody = true,
   });
 
+  const CookieLogger.all({
+    this.showLogger = true,
+    this.requestHeader = true,
+    this.request = true,
+    this.requestBody = true,
+    this.responseHeader = true,
+    this.responseBody = true,
+  });
+
   final bool showLogger;
   final bool requestHeader;
   final bool request;

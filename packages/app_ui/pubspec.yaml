@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   easy_logger: 0.0.2
+  lottie: ^2.1.0
 
   flutter:
     sdk: flutter
@@ -16,7 +17,69 @@ dependencies:
   font_awesome_flutter: ^10.2.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  mocktail: ^1.0.0
+  build_runner: ^2.4.6
+  flutter_gen_runner: ^5.3.1
   very_good_analysis: ^5.0.0+1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/animations/
+    - assets/images/
+    - assets/fonts/Poppins/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins/Poppins-ThinItalic.ttf
+          style: italic
+          weight: 100
+        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf
+          style: italic
+          weight: 200
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins/Poppins-LightItalic.ttf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf
+          style: italic
+          weight: 600
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins/Poppins-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
+          style: italic
+          weight: 800
+        - asset: assets/fonts/Poppins/Poppins-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Poppins/Poppins-BlackItalic.ttf
+          style: italic
+          weight: 900
+
+flutter_gen:
+  assets:
+    package_parameter_enabled: true
+  output: lib/src/generated
+  line_length: 80
+
+  integrations:
+    flutter_svg: true

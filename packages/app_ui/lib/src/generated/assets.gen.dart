@@ -15,8 +15,14 @@ class $AssetsAnimationsGen {
   /// File path: assets/animations/lot_error.json
   String get lotError => 'assets/animations/lot_error.json';
 
+  /// File path: assets/animations/lot_loading.json
+  String get lotLoading => 'assets/animations/lot_loading.json';
+
+  /// File path: assets/animations/lot_pen.json
+  String get lotPen => 'assets/animations/lot_pen.json';
+
   /// List of all assets
-  List<String> get values => [lotError];
+  List<String> get values => [lotError, lotLoading, lotPen];
 }
 
 class $AssetsFontsGen {

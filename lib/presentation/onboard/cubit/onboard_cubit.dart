@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
-import 'package:notify/presentation/authentication/start/view/start_page.dart';
+import 'package:notify/utils/router/router.dart';
 
 final class OnboardCubit extends Cubit<int> {
   OnboardCubit({
@@ -40,7 +40,7 @@ final class OnboardCubit extends Cubit<int> {
   }
 
   Future<void> _navigate() async {
-    _router.go(StartPage.location);
+    _router.go(AppRoutes.start.location);
     await _authRepository.saveOnboardStatusToDone();
   }
 }

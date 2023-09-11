@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
-import 'package:notify/presentation/authentication/start/view/start_page.dart';
-import 'package:notify/presentation/onboard/onboard.dart';
+import 'package:notify/utils/router/router.dart';
 
 part 'splash_state.dart';
 
@@ -19,11 +20,15 @@ final class SplashCubit extends Cubit<SplashState> {
   final IAuthRepository _authRepository;
 
   Future<void> navigate() async {
-    final result = await _authRepository.readOnboardStatus();
-    if (result != null) {
-      await _router.pushReplacement(StartPage.location);
+    final onboardStatus = await _authRepository.readOnboardStatus();
+    if (onboardStatus != null) {
+      final accessToken = await _authRepository.readAccessToken();
+      if (accessToken != null) {
+        unawaited(_router.replace<void>(AppRoutes.home.location));
+      }
+      unawaited(_router.replace<void>(AppRoutes.start.location));
     } else {
-      await _router.pushReplacement(OnboardPage.location);
+      unawaited(_router.replace<void>(AppRoutes.onboard.location));
     }
   }
 }

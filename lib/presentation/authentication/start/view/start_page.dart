@@ -2,16 +2,12 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notify/presentation/authentication/login/login.dart';
-import 'package:notify/presentation/authentication/register/register.dart';
 import 'package:notify/utils/extensions/extensions.dart';
+import 'package:notify/utils/router/router.dart';
 
 @immutable
 final class StartPage extends StatelessWidget {
   const StartPage({super.key});
-
-  static const location = '/start';
-  static const name = 'start';
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +48,13 @@ final class StartPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const Spacer(flex: 24),
+              const Spacer(flex: 2),
+              const PenAnimWidget(),
+              const Spacer(flex: 2),
               AuthButton.text(
                 title: context.l10n.startLogin,
                 onPressed: () {
-                  context.push(LoginPage.location);
+                  context.push(AppRoutes.login.location);
                 },
               ),
               const Spacer(),
@@ -65,7 +63,7 @@ final class StartPage extends StatelessWidget {
                 title: context.l10n.startCreateAccount,
                 foregroundColor: context.colorScheme.onTertiaryContainer,
                 onPressed: () {
-                  context.push(RegisterPage.location);
+                  context.push(AppRoutes.register.location);
                 },
               ),
               const Spacer(
