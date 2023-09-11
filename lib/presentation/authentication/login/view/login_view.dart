@@ -2,7 +2,6 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:notify/core/padding/padding.dart';
 import 'package:notify/presentation/authentication/login/login.dart';
 import 'package:notify/presentation/widgets/widgets.dart';
@@ -37,11 +36,7 @@ class LoginView extends StatelessWidget {
             leading: AdaptiveIconButton(
               icon: Icons.arrow_back_ios_new,
               color: context.colorScheme.onBackground,
-              onPressed: () {
-                if (context.canPop()) {
-                  context.pop();
-                }
-              },
+              onPressed: () => loginBloc.add(LoginBackButtonPressed()),
             ),
           ),
           body: LoadingWidget(

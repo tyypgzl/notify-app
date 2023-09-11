@@ -1,13 +1,13 @@
 enum AppRoutes {
-  splash(location: '/', name: 'splash'),
-  onboard(location: '/onboard', name: 'onboard'),
-  start(location: '/start', name: 'start'),
-  login(location: '/login', name: 'login'),
-  register(location: '/register', name: 'register'),
-  home(location: '/home', name: 'home');
+  splash(path: '/', name: 'splash'),
+  onboard(path: '/onboard', name: 'onboard'),
+  start(path: '/start', name: 'start'),
+  login(path: '/login', name: 'login'),
+  register(path: '/register', name: 'register'),
+  home(path: '/home', name: 'home');
 
-  const AppRoutes({required this.location, required this.name});
+  const AppRoutes({required this.path, required this.name});
 
-  final String location;
+  final String path;
   final String name;
 }

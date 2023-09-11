@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
-import 'package:notify/utils/extensions/context_extension.dart';
+import 'package:notify/utils/locator/service_locator.dart';
 import 'package:notify/utils/router/app_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,6 +18,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> with WidgetsBindingObserver {
   AppLifecycleState? state;
+  final _appRouter = getIt<AppRouter>();
 
   @override
   void initState() {
@@ -54,7 +55,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              routerConfig: AppRouter.goRouter,
+              routeInformationProvider: _appRouter.routeInfoProvider(),
+              routerDelegate: _appRouter.delegate(),
+              routeInformationParser: _appRouter.defaultRouteParser(),
               themeMode: appState.themeMode,
               theme: FlexThemeData.light(
                 scheme: FlexScheme.brandBlue,
@@ -76,10 +79,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 ),
               ),
               builder: (BuildContext context, Widget? widget) {
-                print('---');
-                print(context.colorScheme.primary);
-                print(context.colorScheme.secondary);
-                print(context.colorScheme.tertiary);
                 ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
                   return ErrorView(
                     message: errorDetails.toString(),

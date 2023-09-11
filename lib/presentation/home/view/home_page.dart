@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:notify/presentation/home/view/home_view.dart';
 
+@RoutePage()
 @immutable
 final class HomePage extends StatelessWidget {
   const HomePage({super.key});
