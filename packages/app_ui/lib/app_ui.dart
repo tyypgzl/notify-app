@@ -6,6 +6,7 @@ export 'src/constants/app_constants.dart';
 export 'src/constants/size_constants.dart';
 export 'src/generated/generated.dart';
 export 'src/mixins/state_mixin.dart';
+export 'src/theme/theme.dart';
 export 'src/utils/app_logger.dart';
 export 'src/widgets/adaptive_button.dart';
 export 'src/widgets/adaptive_icon_button.dart';

@@ -1,5 +1,4 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -56,25 +55,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),
           themeMode: appState.themeMode,
-          theme: FlexThemeData.light(
-            scheme: FlexScheme.brandBlue,
-            appBarStyle: FlexAppBarStyle.primary,
-            fontFamily: FontFamily.poppins,
-            subThemesData: const FlexSubThemesData(
-              inputDecoratorRadius: 4,
-              inputDecoratorBorderType: FlexInputBorderType.underline,
-            ),
-          ),
-          // The Mandy red, dark theme.
-          darkTheme: FlexThemeData.dark(
-            scheme: FlexScheme.aquaBlue,
-            appBarStyle: FlexAppBarStyle.primary,
-            fontFamily: FontFamily.poppins,
-            subThemesData: const FlexSubThemesData(
-              inputDecoratorRadius: 4,
-              inputDecoratorBorderType: FlexInputBorderType.underline,
-            ),
-          ),
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
           builder: (BuildContext context, Widget? widget) {
             ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
               return ErrorView(
