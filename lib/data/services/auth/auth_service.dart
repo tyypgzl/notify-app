@@ -1,6 +1,7 @@
 import 'package:notify/core/client/cookie_client.dart';
 import 'package:notify/data/models/auth/login/login_request.dart';
 import 'package:notify/data/models/auth/login/login_response.dart';
+import 'package:notify/data/models/auth/register/register.dart';
 import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/constants/api.dart';
 
@@ -22,7 +23,12 @@ final class AuthService implements IAuthService {
   }
 
   @override
-  Future<LoginResponse?> register(LoginRequest request) {
-    throw UnimplementedError();
+  Future<RegisterResponse?> register(RegisterRequest request) async {
+    final response = await _client.post<RegisterResponse, RegisterResponse>(
+      ConstAPI.register,
+      responseModel: const RegisterResponse(),
+      data: request.toJson(),
+    );
+    return response;
   }
 }

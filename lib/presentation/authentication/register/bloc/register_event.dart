@@ -24,3 +24,8 @@ final class RegisterBackButtonPressed extends RegisterEvent {
   @override
   List<Object?> get props => [];
 }
+
+final class ResetRegisterSnackBar extends RegisterEvent {
+  @override
+  List<Object?> get props => [];
+}

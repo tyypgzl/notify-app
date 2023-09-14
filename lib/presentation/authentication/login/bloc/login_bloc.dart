@@ -39,9 +39,9 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     try {
+      await SystemChannels.textInput.invokeMethod('TextInput.hide');
       if (formKey.currentState?.validate() ?? false) {
         emit(state.copyWith(status: LoginStatus.loading));
-        await SystemChannels.textInput.invokeMethod('TextInput.hide');
         final request = LoginRequest(
           email: emailController.text,
           password: passwordController.text,

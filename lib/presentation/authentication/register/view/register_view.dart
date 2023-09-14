@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/padding/padding.dart';
 import 'package:notify/presentation/authentication/register/register.dart';
+import 'package:notify/presentation/widgets/widgets.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
@@ -13,44 +14,66 @@ final class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registerBloc = context.read<RegisterBloc>();
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: context.colorScheme.background,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        leading: AdaptiveIconButton(
-          icon: Icons.arrow_back_ios_new,
-          color: context.colorScheme.onBackground,
-          onPressed: () => registerBloc.add(const RegisterBackButtonPressed()),
-        ),
-      ),
-      body: Form(
-        key: registerBloc.formKey,
-        child: SingleChildScrollView(
-          padding: const AppPadding.page(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints.expand(
-              height:
-                  context.height - context.viewPaddingVertical - kToolbarHeight,
-              width: context.width,
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listenWhen: (previous, current) =>
+          previous.snackBarInfo != current.snackBarInfo,
+      buildWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if (state.snackBarInfo.showSnackBar) {
+          showSnackBar(
+            context: context,
+            content: state.snackBarInfo.message ?? '',
+            type: state.snackBarInfo.type,
+          );
+          registerBloc.add(ResetRegisterSnackBar());
+        }
+      },
+      builder: (context, state) {
+        return LoadingWidget(
+          isLoading: state.isLoading,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: context.colorScheme.background,
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
+              leading: AdaptiveIconButton(
+                icon: Icons.arrow_back_ios_new,
+                color: context.colorScheme.onBackground,
+                onPressed: () =>
+                    registerBloc.add(const RegisterBackButtonPressed()),
+              ),
             ),
-            child: const Column(
-              children: [
-                Spacer(flex: 2),
-                RegisterTitle(),
-                Spacer(flex: 3),
-                EmailTextField(),
-                Spacer(flex: 2),
-                PasswordTextField(),
-                Spacer(flex: 3),
-                RegisterButton(),
-                Spacer(),
-                AlreadyHaveAccountButton(),
-                Spacer(flex: 7),
-              ],
+            body: Form(
+              key: registerBloc.formKey,
+              child: SingleChildScrollView(
+                padding: const AppPadding.page(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(
+                    height: context.height -
+                        context.viewPaddingVertical -
+                        kToolbarHeight,
+                    width: context.width,
+                  ),
+                  child: const Column(
+                    children: [
+                      Spacer(flex: 2),
+                      RegisterTitle(),
+                      Spacer(flex: 3),
+                      EmailTextField(),
+                      Spacer(flex: 2),
+                      PasswordTextField(),
+                      Spacer(flex: 3),
+                      RegisterButton(),
+                      Spacer(),
+                      AlreadyHaveAccountButton(),
+                      Spacer(flex: 7),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

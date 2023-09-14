@@ -1,6 +1,8 @@
 import 'package:notify/core/client/utils/exception.dart';
 import 'package:notify/core/exception/notify_exception.dart';
 import 'package:notify/data/models/auth/login/login.dart';
+import 'package:notify/data/models/auth/register/register_request.dart';
+import 'package:notify/data/models/auth/register/register_response.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
 import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/constants/constants.dart';
@@ -24,6 +26,24 @@ final class AuthRepository implements IAuthRepository {
   Future<LoginResponse?> login(LoginRequest request) async {
     try {
       final result = await _authService.login(request);
+      return result;
+    } on CookieException catch (err, stackTrace) {
+      Error.throwWithStackTrace(
+        NotifyException(
+          type: ExceptionType.other,
+          statusCode: err.statusCode,
+          message: err.message,
+          stackTrace: err.stackTrace,
+        ),
+        stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<RegisterResponse?> register(RegisterRequest request) async {
+    try {
+      final result = await _authService.register(request);
       return result;
     } on CookieException catch (err, stackTrace) {
       Error.throwWithStackTrace(

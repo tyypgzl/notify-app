@@ -1,7 +1,7 @@
-import 'package:notify/core/client/utils/model.dart';
+import 'package:notify/core/client/utils/utils.dart';
 
-final class LoginResponse implements CookieModel<LoginResponse> {
-  const LoginResponse({
+final class RegisterResponse implements CookieModel<RegisterResponse> {
+  const RegisterResponse({
     this.accessToken,
     this.message,
     this.status,
@@ -21,11 +21,15 @@ final class LoginResponse implements CookieModel<LoginResponse> {
   }
 
   @override
-  LoginResponse fromJson(Map<String, dynamic> json) {
-    return LoginResponse(
+  RegisterResponse fromJson(Map<String, dynamic> json) {
+    return RegisterResponse(
       accessToken: json['accessToken'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
     );
   }
+
+  @override
+  String toString() => 'RegisterResponse(accessToken: $accessToken'
+      ',message: $message,status: $status)';
 }
