@@ -2,7 +2,6 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notify/core/padding/padding.dart';
 import 'package:notify/presentation/authentication/login/login.dart';
 import 'package:notify/presentation/widgets/widgets.dart';
 import 'package:notify/utils/extensions/extensions.dart';

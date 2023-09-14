@@ -22,7 +22,7 @@ final class SplashCubit extends Cubit<SplashState> {
     if (onboardStatus != null) {
       final accessToken = await _authRepository.readAccessToken();
       if (accessToken != null) {
-        unawaited(_router.replaceNamed(AppRoutes.home.path));
+        unawaited(_router.replaceNamed(AppRoutes.dashboard.path));
       } else {
         unawaited(_router.replaceNamed(AppRoutes.start.path));
       }

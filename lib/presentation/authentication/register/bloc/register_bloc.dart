@@ -48,7 +48,7 @@ final class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
         emit(state.copyWith(status: RegisterStatus.success));
         await _authRepository.saveAccessToken(result?.accessToken);
-        unawaited(_router.replaceAll([const HomeRoute()]));
+        unawaited(_router.replaceAll([const DashboardRoute()]));
       }
     } on NotifyException catch (error, stacktrace) {
       emit(

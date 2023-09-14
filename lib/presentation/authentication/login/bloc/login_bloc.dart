@@ -51,7 +51,7 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: LoginStatus.success));
         unawaited(
           _router.replaceAll([
-            const HomeRoute(),
+            const DashboardRoute(),
           ]),
         );
       }
