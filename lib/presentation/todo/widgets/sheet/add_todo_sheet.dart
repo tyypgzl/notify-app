@@ -1,74 +1,34 @@
+import 'package:app_ui/app_ui.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/todo.dart';
-import 'package:notify/utils/extensions/extensions.dart';
 
 import 'package:uuid/uuid.dart';
 
 @immutable
-class AddTodoWidgetSheet extends StatefulWidget {
-  const AddTodoWidgetSheet({
-    super.key,
-    required this.formKey,
-    required this.onCompleted,
-  });
-
-  final GlobalKey<FormState> formKey;
-  final void Function(TodoModel? todo) onCompleted;
+final class AddTodoWidgetSheet extends StatefulWidget {
+  const AddTodoWidgetSheet({super.key});
 
   @override
   State<AddTodoWidgetSheet> createState() => _AddTodoWidgetSheetState();
 }
 
-class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
+final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
     with TodoValidationMixin {
-  late final TextEditingController todoController;
-  late final TextEditingController tagsController;
-  late final FocusNode todoFocusNode;
-  late final FocusNode tagsFocusNode;
-
-  TodoPriority? _selectedTodo;
-  MaterialColor? _selectedColor;
-  TodoModel? _todo;
-
-  @override
-  void initState() {
-    super.initState();
-    todoController = TextEditingController();
-    tagsController = TextEditingController();
-    todoFocusNode = FocusNode();
-    tagsFocusNode = FocusNode();
-    tagsFocusNode.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    todoController.dispose();
-    tagsController.dispose();
-    todoFocusNode.dispose();
-    tagsFocusNode.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: context.viewPaddingBottom,
-      ).add(
-        const EdgeInsets.all(
-          16,
-        ),
-      ),
+        bottom: MediaQuery.viewInsetsOf(context).bottom,
+      ).add(const AppPadding.sheet()),
       child: Form(
-        key: widget.formKey,
+        key: formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const AppPadding.y12(),
               child: TextFormField(
                 autofocus: true,
                 focusNode: todoFocusNode,
@@ -88,7 +48,7 @@ class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const AppPadding.y12(),
               child: TextField(
                 focusNode: tagsFocusNode,
                 decoration: const InputDecoration(
@@ -97,16 +57,18 @@ class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                 ),
                 controller: tagsController,
                 onEditingComplete: () {
-                  _todo = TodoModel(
-                    title: todoController.text,
-                    colorNumber: Colors.primaries.indexOf(
-                      _selectedColor ?? Colors.grey,
-                    ),
-                    activity: TodoActivity.active,
-                    id: const Uuid().v1(),
-                    createdTime: DateTime.now(),
-                  );
-                  widget.onCompleted(_todo);
+                  if (formKey.currentState?.validate() ?? false) {
+                    final todo = TodoModel(
+                      title: todoController.text,
+                      colorNumber: Colors.primaries.indexOf(
+                        _selectedColor ?? Colors.grey,
+                      ),
+                      activity: TodoActivity.active,
+                      id: const Uuid().v1(),
+                      createdTime: DateTime.now(),
+                    );
+                    context.popRoute(todo);
+                  }
                 },
               ),
             ),
@@ -200,7 +162,38 @@ class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
   }
 }
 
-mixin TodoValidationMixin {
+mixin TodoValidationMixin on State<AddTodoWidgetSheet> {
+  late final TextEditingController todoController;
+  late final TextEditingController tagsController;
+  late final FocusNode todoFocusNode;
+  late final FocusNode tagsFocusNode;
+  late final GlobalKey<FormState> formKey;
+
+  TodoPriority? _selectedTodo;
+  MaterialColor? _selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    todoController = TextEditingController();
+    tagsController = TextEditingController();
+    todoFocusNode = FocusNode();
+    tagsFocusNode = FocusNode();
+    formKey = GlobalKey<FormState>();
+    tagsFocusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    todoController.dispose();
+    tagsController.dispose();
+    todoFocusNode.dispose();
+    tagsFocusNode.dispose();
+  }
+
   String? emptyValid({
     String? value,
     required String errorMessage,

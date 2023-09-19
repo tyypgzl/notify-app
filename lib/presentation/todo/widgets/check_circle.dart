@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/todo.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
-class AnimatedCircleCheck extends StatefulWidget {
+@immutable
+final class AnimatedCircleCheck extends StatefulWidget {
   const AnimatedCircleCheck({
     super.key,
     required this.onChanged,
@@ -14,7 +16,7 @@ class AnimatedCircleCheck extends StatefulWidget {
   State<AnimatedCircleCheck> createState() => _AnimatedCircleCheckState();
 }
 
-class _AnimatedCircleCheckState extends State<AnimatedCircleCheck>
+final class _AnimatedCircleCheckState extends State<AnimatedCircleCheck>
     with SingleTickerProviderStateMixin {
   late TodoActivity _activity;
 
@@ -40,17 +42,21 @@ class _AnimatedCircleCheckState extends State<AnimatedCircleCheck>
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: _activity.boolValue
-              ? Colors.green
+              ? Colors.green.shade400
               : context.colorScheme.background,
           border: Border.all(
             color: _activity.boolValue
-                ? Colors.green
+                ? Colors.green.shade400
                 : context.colorScheme.onBackground.withOpacity(.4),
           ),
         ),
         child: _activity.boolValue
             ? const Center(
-                child: Icon(Icons.done),
+                child: Icon(
+                  FontAwesomeIcons.check,
+                  size: 18,
+                  color: Colors.white,
+                ),
               )
             : null,
       ),

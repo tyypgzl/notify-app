@@ -2,7 +2,8 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AuthButton extends StatelessWidget {
+@immutable
+final class AuthButton extends StatelessWidget {
   const AuthButton.text({
     super.key,
     required String title,

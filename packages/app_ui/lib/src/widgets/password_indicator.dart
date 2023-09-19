@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class PasswordIndicator extends StatelessWidget {
+final class PasswordIndicator extends StatelessWidget {
   const PasswordIndicator({
     super.key,
     this.length = 5,

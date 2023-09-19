@@ -17,7 +17,6 @@ final class DashboardView extends StatelessWidget {
         NoteRoute(),
         SettingsRoute(),
       ],
-      appBarBuilder: (context, tabsRouter) => AppBar(),
       bottomNavigationBuilder: (context, tabsRouter) {
         return AdaptiveTabBar(
           currentIndex: tabsRouter.activeIndex,

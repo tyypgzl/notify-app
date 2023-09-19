@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:notify/utils/locator/service_locator.dart';
 import 'package:notify/utils/router/router.dart';
 
-class StartCubit extends Cubit<void> {
+final class StartCubit extends Cubit<void> {
   StartCubit() : super(null);
 
   final _router = getIt<AppRouter>();

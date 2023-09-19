@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 @immutable
-class LoadingWidget extends StatelessWidget {
+final class LoadingWidget extends StatelessWidget {
   const LoadingWidget({
     super.key,
     required this.child,

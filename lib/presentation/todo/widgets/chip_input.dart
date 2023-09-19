@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ChipInput extends StatefulWidget {
+@immutable
+final class ChipInput extends StatefulWidget {
   const ChipInput({super.key});
 
   @override
   State<ChipInput> createState() => _ChipInputState();
 }
 
-class _ChipInputState extends State<ChipInput> {
+final class _ChipInputState extends State<ChipInput> {
   final chips = List.generate(3, (index) => 'Chip ${index + 1}').toSet();
   final controller = TextEditingController();
   final focusNode = FocusNode();

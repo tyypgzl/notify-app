@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class AuthClickableTextSpans extends StatelessWidget {
+@immutable
+final class AuthClickableTextSpans extends StatelessWidget {
   const AuthClickableTextSpans({
     super.key,
     required this.notClickableText,

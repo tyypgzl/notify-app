@@ -1,7 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:bloc/bloc.dart';
 
-class AppBlocObserver extends BlocObserver {
+final class AppBlocObserver extends BlocObserver {
 /*  @override
   void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);

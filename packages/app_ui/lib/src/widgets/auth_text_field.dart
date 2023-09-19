@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 enum _AuthTextFieldType { email, password }
 
 @immutable
-class AuthTextField extends StatefulWidget {
+final class AuthTextField extends StatefulWidget {
   // ignore: unused_element
   const AuthTextField._(
     this._passwordErrorText,
@@ -107,7 +107,8 @@ class AuthTextField extends StatefulWidget {
   State<AuthTextField> createState() => _AuthTextFieldState();
 }
 
-class _AuthTextFieldState extends State<AuthTextField> with ValidationMixin {
+final class _AuthTextFieldState extends State<AuthTextField>
+    with ValidationMixin {
   late final _AuthTextFieldType authTextFieldType;
   late final bool enabled;
   late final TextEditingController textEditingController;

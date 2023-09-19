@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AdaptiveTabBar extends StatelessWidget {
+@immutable
+final class AdaptiveTabBar extends StatelessWidget {
   const AdaptiveTabBar({
     required this.currentIndex,
     required this.items,

@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AdaptiveTile extends StatelessWidget {
+@immutable
+final class AdaptiveTile extends StatelessWidget {
   const AdaptiveTile({
     super.key,
     required this.title,
@@ -21,13 +22,14 @@ class AdaptiveTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS && Platform.isMacOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       return CupertinoListTile(
         title: title,
         leading: leading,
         trailing: trailing,
         subtitle: subtitle,
         onTap: onTap,
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
       );
     } else {
       return ListTile(

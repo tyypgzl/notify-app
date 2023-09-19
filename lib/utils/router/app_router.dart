@@ -16,7 +16,7 @@ part 'app_router.gr.dart';
 @AutoRouterConfig(
   replaceInRouteName: 'View|Page|Screen|Widget,Route',
 )
-class AppRouter extends _$AppRouter {
+final class AppRouter extends _$AppRouter {
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
 

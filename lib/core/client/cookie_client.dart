@@ -8,7 +8,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 enum HttpMethod { GET, POST, DELETE, PUT, PATCH }
 
-class CookieClient {
+final class CookieClient {
   CookieClient({
     required String baseUrl,
     Map<String, dynamic>? headers,

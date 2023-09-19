@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/authentication/register/register.dart';
-import 'package:notify/presentation/widgets/widgets.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable

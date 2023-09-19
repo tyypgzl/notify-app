@@ -7,14 +7,15 @@ import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/utils/locator/service_locator.dart';
 import 'package:notify/utils/router/app_router.dart';
 
-class App extends StatefulWidget {
+@immutable
+final class App extends StatefulWidget {
   const App({super.key});
 
   @override
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> with WidgetsBindingObserver {
+final class _AppState extends State<App> with WidgetsBindingObserver {
   AppLifecycleState? state;
   final _appRouter = getIt<AppRouter>();
 
@@ -59,7 +60,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           darkTheme: AppTheme.dark,
           builder: (BuildContext context, Widget? widget) {
             ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-              return ErrorView(
+              return ErrorPage(
                 message: errorDetails.toString(),
                 stackTrace: errorDetails.stack,
               );

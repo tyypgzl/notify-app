@@ -1,5 +1,5 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void showSnackBar({
   required BuildContext context,
@@ -53,37 +53,4 @@ void showSnackBar({
       action: action,
     ),
   );
-}
-
-enum SnackBarType {
-  warning,
-  info,
-  error,
-  success;
-
-  Color get color {
-    switch (this) {
-      case SnackBarType.warning:
-        return Colors.amber;
-      case SnackBarType.info:
-        return Colors.blueAccent;
-      case SnackBarType.error:
-        return Colors.redAccent;
-      case SnackBarType.success:
-        return Colors.green;
-    }
-  }
-
-  IconData get icon {
-    switch (this) {
-      case SnackBarType.warning:
-        return FontAwesomeIcons.triangleExclamation;
-      case SnackBarType.info:
-        return FontAwesomeIcons.circleInfo;
-      case SnackBarType.error:
-        return FontAwesomeIcons.circleExclamation;
-      case SnackBarType.success:
-        return FontAwesomeIcons.solidCircleCheck;
-    }
-  }
 }

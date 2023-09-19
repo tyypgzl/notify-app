@@ -1,6 +1,6 @@
 import 'package:easy_logger/easy_logger.dart';
 
-class AppLogger {
+final class AppLogger {
   AppLogger._init() {
     _logger = EasyLogger(
       enableBuildModes: [BuildMode.debug, BuildMode.profile],

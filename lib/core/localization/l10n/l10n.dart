@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class L10n {
+final class L10n {
   L10n._();
 
   static const Locale en = Locale.fromSubtags(languageCode: 'en');

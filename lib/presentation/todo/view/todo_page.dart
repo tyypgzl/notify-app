@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/presentation/todo/todo.dart';
 
 @RoutePage()
@@ -9,6 +10,9 @@ final class TodoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TodoView();
+    return BlocProvider<TodoBloc>(
+      create: (context) => TodoBloc(),
+      child: const TodoView(),
+    );
   }
 }

@@ -72,7 +72,7 @@ abstract class _$AppRouter extends RootStackRouter {
     TodoRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const TodoView(),
+        child: const TodoPage(),
       );
     },
   };
@@ -205,7 +205,7 @@ class TaskRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TodoView]
+/// [TodoPage]
 class TodoRoute extends PageRouteInfo<void> {
   const TodoRoute({List<PageRouteInfo>? children})
       : super(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_ui/app_ui.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:notify/core/exception/notify_exception.dart';
 import 'package:notify/data/models/auth/register/register.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
-import 'package:notify/presentation/widgets/widgets.dart';
 import 'package:notify/utils/locator/service_locator.dart';
 import 'package:notify/utils/router/router.dart';
 

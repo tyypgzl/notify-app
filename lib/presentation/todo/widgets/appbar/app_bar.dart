@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/filter.dart';
 import 'package:notify/presentation/todo/todo.dart';
@@ -11,22 +12,28 @@ final class TodoAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todoBloc = context.read<TodoBloc>();
     return AppBar(
       title: Text(context.l10n.todoTitle),
       actions: [
         AdaptiveIconButton(
-          onPressed: () async {
-            // TODO(tyypgzl): add to bloc
-            await showModalBottomSheet<dynamic>(
-              context: context,
-              builder: (context) {
-                return const FilterSheetWidget(
-                  filter: TodoFilter.all,
-                );
-              },
+          onPressed: () {
+            todoBloc.add(
+              FilterSheetOpened(
+                onSheetOpened: () => showModalBottomSheet<TodoFilter>(
+                  context: context,
+                  showDragHandle: true,
+                  builder: (context) {
+                    return FilterSheetWidget(
+                      filter: todoBloc.state.filter,
+                    );
+                  },
+                ),
+              ),
             );
           },
           icon: FontAwesomeIcons.filter,
+          color: context.colorScheme.onPrimary,
         ),
       ],
     );

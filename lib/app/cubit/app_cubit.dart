@@ -5,7 +5,7 @@ import 'package:notify/core/localization/localization.dart';
 
 part 'app_state.dart';
 
-class AppCubit extends HydratedCubit<AppState> {
+final class AppCubit extends HydratedCubit<AppState> {
   AppCubit() : super(const AppState());
 
   @override

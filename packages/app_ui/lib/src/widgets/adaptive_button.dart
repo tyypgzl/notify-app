@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AdaptiveButton extends StatelessWidget {
+@immutable
+final class AdaptiveButton extends StatelessWidget {
   const AdaptiveButton({
     super.key,
     required this.child,

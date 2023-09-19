@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextDivider extends StatelessWidget {
+@immutable
+final class TextDivider extends StatelessWidget {
   const TextDivider({
     super.key,
     required this.text,

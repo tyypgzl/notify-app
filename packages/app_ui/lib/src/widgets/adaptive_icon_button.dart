@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class AdaptiveIconButton extends StatelessWidget {
+final class AdaptiveIconButton extends StatelessWidget {
   const AdaptiveIconButton({
     super.key,
     required this.icon,
