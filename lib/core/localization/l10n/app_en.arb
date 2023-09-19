@@ -43,11 +43,27 @@
   "registerOr": "OR",
   "registerAlreadyHaveAccount": "Already have an account?",
   "registerLoginTitle": " Login ",
+    "@_TODO": {
+  },
+  "todoTitle": "Todo",
+  "@_TASK": {
+  },
+  "taskTitle": "Task",
+  "@_NOTE": {
+  },
+  "noteTitle": "Note",
+  "@_SETTİNGS": {
+  },
+  "settingTitle": "Settings",
   "@_GENERAL": {
   },
-  "google": "Google",
-  "facebook": "Facebook",
-  "apple": "Apple",
   "emailValidationText": "Please enter a valid e-mail address.",
-  "passwordValidationMessage": "Your password is easily guessed. Try making your password longer. Combine uppercase and lowercase letters. Add special characters and numbers. Do not use simple words and names."
+  "passwordValidationMessage": "Your password is easily guessed. Try making your password longer. Combine uppercase and lowercase letters. Add special characters and numbers. Do not use simple words and names.",
+    "@_ENUMS": {
+  },
+  "enumTodoPriorityVeryHigh": "Very High",
+  "enumTodoPriorityHigh": "High",
+  "enumTodoPriorityMedium": "Medium",
+  "enumTodoPriorityLow": "Low",
+  "enumTodoPriorityVeryLow": "Very Low"
 }

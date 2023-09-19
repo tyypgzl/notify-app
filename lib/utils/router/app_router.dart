@@ -43,25 +43,26 @@ class AppRouter extends _$AppRouter {
           path: AppRoutes.register.path,
         ),
         AutoRoute(
-            page: DashboardRoute.page,
-            path: AppRoutes.dashboard.path,
-            children: [
-              AutoRoute(
-                page: TodoRoute.page,
-                path: AppRoutes.todo.path,
-              ),
-              AutoRoute(
-                page: TaskRoute.page,
-                path: AppRoutes.task.path,
-              ),
-              AutoRoute(
-                page: NoteRoute.page,
-                path: AppRoutes.note.path,
-              ),
-              AutoRoute(
-                page: SettingsRoute.page,
-                path: AppRoutes.settings.path,
-              ),
-            ]),
+          page: DashboardRoute.page,
+          path: AppRoutes.dashboard.path,
+          children: [
+            AutoRoute(
+              page: TodoRoute.page,
+              path: AppRoutes.todo.path,
+            ),
+            AutoRoute(
+              page: TaskRoute.page,
+              path: AppRoutes.task.path,
+            ),
+            AutoRoute(
+              page: NoteRoute.page,
+              path: AppRoutes.note.path,
+            ),
+            AutoRoute(
+              page: SettingsRoute.page,
+              path: AppRoutes.settings.path,
+            ),
+          ],
+        ),
       ];
 }

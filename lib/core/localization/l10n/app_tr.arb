@@ -43,12 +43,28 @@
   "registerOr": "Veya",
   "registerAlreadyHaveAccount": "Zaten hesabınız var mı?",
   "registerLoginTitle": " Giriş Yap ",
+    "@_TODO": {
+  },
+  "todoTitle": "Todo",
+  "@_TASK": {
+  },
+  "taskTitle": "Görevler",
+  "@_NOTE": {
+  },
+  "noteTitle": "Not",
+  "@_SETTİNGS": {
+  },
+  "settingTitle": "Ayarlar",
   "@_GENERAL": {
   },
-  "google": "Google",
-  "facebook": "Facebook",
-  "apple": "Apple",
   "emailValidationText": "Lütfen geçerli bir e-posta adresi giriniz.",
-  "passwordValidationMessage": "Parolanız kolayca tahmin edilir. Parolanızı daha uzun yapmayı deneyin. Büyük ve küçük harfleri birleştirin. Özel karakterler ve sayılar ekleyin. Basit kelimeler ve isimler kullanmayın."
+  "passwordValidationMessage": "Parolanız kolayca tahmin edilir. Parolanızı daha uzun yapmayı deneyin. Büyük ve küçük harfleri birleştirin. Özel karakterler ve sayılar ekleyin. Basit kelimeler ve isimler kullanmayın.",
+    "@_ENUMS": {
+  },
+  "enumTodoPriorityVeryHigh": "Çok Yüksek",
+  "enumTodoPriorityHigh": "Yüksek",
+  "enumTodoPriorityMedium": "Orta",
+  "enumTodoPriorityLow": "Düşük",
+  "enumTodoPriorityVeryLow": "Çok Düşük"
 }
 

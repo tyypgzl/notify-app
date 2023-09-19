@@ -14,6 +14,7 @@ export 'src/widgets/adaptive_button.dart';
 export 'src/widgets/adaptive_icon_button.dart';
 export 'src/widgets/adaptive_tab_bar.dart';
 export 'src/widgets/adaptive_text_button.dart';
+export 'src/widgets/adaptive_tile.dart';
 export 'src/widgets/auth_button.dart';
 export 'src/widgets/auth_clickable_text_spans.dart';
 export 'src/widgets/auth_text_field.dart';

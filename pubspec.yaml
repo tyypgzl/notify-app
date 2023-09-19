@@ -18,6 +18,9 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   font_awesome_flutter: ^10.5.0
 
+  #Utils
+  uuid: ^3.0.7
+
   #l10n
   intl: ^0.18.0
 
@@ -48,6 +51,7 @@ dependencies:
   #Packages
   app_ui:
     path: packages/app_ui/
+
 
 dev_dependencies:
   flutter_test:
