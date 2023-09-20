@@ -1,14 +1,14 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:alice/alice.dart';
-import 'package:dio/dio.dart';
+import 'package:cookie_client/cookie_client.dart';
+import 'package:cookie_client/src/models/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/core/client/utils/utils.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 enum HttpMethod { GET, POST, DELETE, PUT, PATCH }
 
-final class CookieClient {
+class CookieClient {
   CookieClient({
     required String baseUrl,
     Map<String, dynamic>? headers,
@@ -33,6 +33,13 @@ final class CookieClient {
       headers: headers,
       responseType: responseType,
       queryParameters: queryParameters,
+      validateStatus: (status) {
+        if (status != null) {
+          return status < 500;
+        } else {
+          return false;
+        }
+      },
     );
     _dio = Dio(options);
 
@@ -63,10 +70,10 @@ final class CookieClient {
 
   ///Handy method to make [HttpMethod.POST] request.
   ///[data] must be of type [Map].
-  Future<K> post<R extends CookieModel<Object>, K>(
+  Future<K> post<R extends CookieNetworkModel<Object>, K>(
     String path, {
-    Map<String, dynamic>? queryParameters,
     required R responseModel,
+    Map<String, dynamic>? queryParameters,
     dynamic data,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
@@ -93,9 +100,8 @@ final class CookieClient {
 
       final result = _convertToGenericType<R, K>(dioResponse, responseModel);
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
@@ -126,15 +132,14 @@ final class CookieClient {
       );
 
       return dioResponse.data;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
   ///Handy method to make [HttpMethod.GET] request.
   ///data must be of type [Map].
-  Future<K> get<R extends CookieModel<Object>, K>(
+  Future<K> get<R extends CookieNetworkModel<Object>, K>(
     String path, {
     required R responseModel,
     CancelToken? cancelToken,
@@ -161,15 +166,14 @@ final class CookieClient {
 
       final result = _convertToGenericType<R, K>(dioResponse, responseModel);
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
   ///Handy method to make [HttpMethod.DELETE] request.
   ///[data] must be of type [Map].
-  Future<K> delete<R extends CookieModel<Object>, K>(
+  Future<K> delete<R extends CookieNetworkModel<Object>, K>(
     String path, {
     required R responseModel,
     dynamic data,
@@ -195,18 +199,17 @@ final class CookieClient {
 
       final result = _convertToGenericType<R, K>(dioResponse, responseModel);
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
   ///Handy method to make [HttpMethod.PUT] request.
   ///[data] must be of type [Map].
-  Future<K> put<R extends CookieModel<Object>, K>(
+  Future<K> put<R extends CookieNetworkModel<Object>, K>(
     String path, {
-    Map<String, dynamic>? queryParameters,
     required R responseModel,
+    Map<String, dynamic>? queryParameters,
     dynamic data,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
@@ -233,18 +236,17 @@ final class CookieClient {
 
       final result = _convertToGenericType<R, K>(dioResponse, responseModel);
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
   ///Handy method to make [HttpMethod.PATCH] request.
   ///[data] must be of type [Map].
-  Future<K> patch<R extends CookieModel<Object>, K>(
+  Future<K> patch<R extends CookieNetworkModel<Object>, K>(
     String path, {
-    Map<String, dynamic>? queryParameters,
     required R responseModel,
+    Map<String, dynamic>? queryParameters,
     dynamic data,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
@@ -271,9 +273,8 @@ final class CookieClient {
 
       final result = _convertToGenericType<R, K>(dioResponse, responseModel);
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
@@ -299,47 +300,35 @@ final class CookieClient {
         ),
       );
       return result;
-    } on DioException catch (err, stackTrace) {
-      final error = err.toException();
-      Error.throwWithStackTrace(error, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      Error.throwWithStackTrace(e.toCookieException(), stackTrace);
     }
   }
 
-  K _convertToGenericType<R extends CookieModel<Object>, K>(
+  K _convertToGenericType<R extends CookieNetworkModel<Object>, K>(
     Response<dynamic> dioResponse,
     R responseModel,
   ) {
     try {
-      if (dioResponse.statusCode != null &&
-          dioResponse.statusCode! >= 200 &&
-          dioResponse.statusCode! <= 299) {
-        final data = dioResponse.data;
-        if (data is List) {
-          final typedListModel = List<R>.from(
-            data
-                .map(
-                  (e) => responseModel.fromJson(e as Map<String, dynamic>) as R,
-                )
-                .toList(),
-          ) as K;
-          return typedListModel;
-        } else {
-          final typedModel =
-              responseModel.fromJson(data as Map<String, dynamic>) as K;
-          return typedModel;
-        }
+      final data = dioResponse.data;
+      if (data is List) {
+        final typedListModel = List<R>.from(
+          data
+              .map(
+                (e) => responseModel.fromJson(e as Map<String, dynamic>) as R,
+              )
+              .toList(),
+        ) as K;
+        return typedListModel;
       } else {
-        throw BadResponseException(
-          message: dioResponse.statusMessage ?? 'Bad Response',
-          error: 'Status code: ${dioResponse.statusCode}}',
-          statusCode: dioResponse.statusCode ?? -1,
-        );
+        final typedModel =
+            responseModel.fromJson(data as Map<String, dynamic>) as K;
+        return typedModel;
       }
     } catch (error, stackTrace) {
-      throw JsonParseException(
-        error: error,
-        message: 'Json Parse Error on Cookie Client',
-        stackTrace: stackTrace,
+      Error.throwWithStackTrace(
+        JsonParseException(error: error.toString()),
+        stackTrace,
       );
     }
   }

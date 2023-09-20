@@ -17,5 +17,5 @@ final class NotifyException implements Exception {
   final ExceptionType type;
   final StackTrace? stackTrace;
   final String? message;
-  final int statusCode;
+  final int? statusCode;
 }

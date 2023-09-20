@@ -1,6 +1,6 @@
-import 'package:notify/core/client/utils/utils.dart';
+import 'package:cookie_client/cookie_client.dart';
 
-final class RegisterRequest implements CookieModel<RegisterRequest> {
+final class RegisterRequest implements CookieNetworkModel<RegisterRequest> {
   const RegisterRequest({
     this.email,
     this.password,

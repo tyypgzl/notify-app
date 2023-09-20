@@ -1,0 +1,23 @@
+name: storage
+description: A Very Good Storage package created by STILUS.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: 3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Storage
+  shared_preferences: ^2.2.1
+  flutter_secure_storage: ^9.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+  mocktail: ^0.3.0
+  very_good_analysis: ^5.0.0

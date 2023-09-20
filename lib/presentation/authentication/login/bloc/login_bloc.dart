@@ -5,11 +5,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:notify/core/exception/notify_exception.dart';
 import 'package:notify/data/models/auth/login/login.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
+import 'package:notify/router/router.dart';
+import 'package:notify/utils/exception/notify_exception.dart';
 import 'package:notify/utils/locator/service_locator.dart';
-import 'package:notify/utils/router/router.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

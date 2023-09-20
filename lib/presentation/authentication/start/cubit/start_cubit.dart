@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:notify/router/router.dart';
 import 'package:notify/utils/locator/service_locator.dart';
-import 'package:notify/utils/router/router.dart';
 
 final class StartCubit extends Cubit<void> {
   StartCubit() : super(null);

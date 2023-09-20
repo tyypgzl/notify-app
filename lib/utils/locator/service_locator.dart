@@ -1,19 +1,16 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:cookie_client/cookie_client.dart';
 import 'package:get_it/get_it.dart';
-import 'package:notify/core/client/cookie_client.dart';
-import 'package:notify/core/client/utils/logger.dart';
+import 'package:notify/router/app_router.dart';
 import 'package:notify/utils/constants/api.dart';
-import 'package:notify/utils/router/app_router.dart';
-import 'package:notify/utils/storage/persistent_storage.dart';
-import 'package:notify/utils/storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:storage/storage.dart';
 
 final getIt = GetIt.instance;
 
 void setUp({
   required SharedPreferences sharedPreferences,
 }) {
-  const secureStorage = SecureStorage(FlutterSecureStorage());
+  const secureStorage = SecureStorage();
   final persistentStorage =
       PersistentStorage(sharedPreferences: sharedPreferences);
 

@@ -1,10 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
-final class PersistentStorageException implements Exception {
-  const PersistentStorageException(this.error);
-
-  final Object error;
-}
+import 'package:storage/storage.dart';
 
 final class PersistentStorage {
   const PersistentStorage({
@@ -17,7 +12,7 @@ final class PersistentStorage {
     try {
       return _sharedPreferences.getString(key);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(PersistentStorageException(error), stackTrace);
+      Error.throwWithStackTrace(StorageException(error), stackTrace);
     }
   }
 
@@ -25,7 +20,7 @@ final class PersistentStorage {
     try {
       await _sharedPreferences.setString(key, value);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(PersistentStorageException(error), stackTrace);
+      Error.throwWithStackTrace(StorageException(error), stackTrace);
     }
   }
 
@@ -33,7 +28,7 @@ final class PersistentStorage {
     try {
       await _sharedPreferences.remove(key);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(PersistentStorageException(error), stackTrace);
+      Error.throwWithStackTrace(StorageException(error), stackTrace);
     }
   }
 
@@ -41,7 +36,7 @@ final class PersistentStorage {
     try {
       await _sharedPreferences.clear();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(PersistentStorageException(error), stackTrace);
+      Error.throwWithStackTrace(StorageException(error), stackTrace);
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:notify/utils/router/app_router.dart';
+import 'package:notify/router/app_router.dart';
 
 @immutable
 final class DashboardView extends StatelessWidget {

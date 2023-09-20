@@ -9,7 +9,7 @@ import 'package:notify/presentation/settings/settings.dart';
 import 'package:notify/presentation/splash/splash.dart';
 import 'package:notify/presentation/task/task.dart';
 import 'package:notify/presentation/todo/todo.dart';
-import 'package:notify/utils/router/router.dart';
+import 'package:notify/router/router.dart';
 
 part 'app_router.gr.dart';
 

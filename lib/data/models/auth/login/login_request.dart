@@ -1,6 +1,6 @@
-import 'package:notify/core/client/utils/utils.dart';
+import 'package:cookie_client/cookie_client.dart';
 
-final class LoginRequest implements CookieModel<LoginRequest> {
+final class LoginRequest implements CookieNetworkModel<LoginRequest> {
   const LoginRequest({
     this.email,
     this.password,

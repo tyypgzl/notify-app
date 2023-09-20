@@ -1,4 +1,4 @@
-import 'package:notify/core/client/cookie_client.dart';
+import 'package:cookie_client/cookie_client.dart';
 import 'package:notify/data/models/auth/login/login_request.dart';
 import 'package:notify/data/models/auth/login/login_response.dart';
 import 'package:notify/data/models/auth/register/register.dart';

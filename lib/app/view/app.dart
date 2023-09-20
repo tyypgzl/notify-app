@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
+import 'package:notify/router/app_router.dart';
 import 'package:notify/utils/locator/service_locator.dart';
-import 'package:notify/utils/router/app_router.dart';
 
 @immutable
 final class App extends StatefulWidget {

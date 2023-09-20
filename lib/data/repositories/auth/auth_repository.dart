@@ -1,13 +1,12 @@
-import 'package:notify/core/client/utils/exception.dart';
-import 'package:notify/core/exception/notify_exception.dart';
+import 'package:cookie_client/cookie_client.dart';
 import 'package:notify/data/models/auth/login/login.dart';
 import 'package:notify/data/models/auth/register/register_request.dart';
 import 'package:notify/data/models/auth/register/register_response.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
 import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/constants/constants.dart';
-import 'package:notify/utils/storage/persistent_storage.dart';
-import 'package:notify/utils/storage/secure_storage.dart';
+import 'package:notify/utils/exception/notify_exception.dart';
+import 'package:storage/storage.dart';
 
 final class AuthRepository implements IAuthRepository {
   const AuthRepository({
@@ -33,7 +32,6 @@ final class AuthRepository implements IAuthRepository {
           type: ExceptionType.other,
           statusCode: err.statusCode,
           message: err.message,
-          stackTrace: err.stackTrace,
         ),
         stackTrace,
       );
@@ -51,7 +49,6 @@ final class AuthRepository implements IAuthRepository {
           type: ExceptionType.other,
           statusCode: err.statusCode,
           message: err.message,
-          stackTrace: err.stackTrace,
         ),
         stackTrace,
       );
@@ -64,7 +61,7 @@ final class AuthRepository implements IAuthRepository {
       final result =
           await _persistentStorage.read(key: ConstStorage.onboardStatus);
       return result;
-    } on PersistentStorageException catch (err, stackTrace) {
+    } on StorageException catch (err, stackTrace) {
       final error = NotifyException(
         type: ExceptionType.storage,
         message: err.error.toString(),
@@ -80,7 +77,7 @@ final class AuthRepository implements IAuthRepository {
         key: ConstStorage.onboardStatus,
         value: 'done',
       );
-    } on PersistentStorageException catch (err, stackTrace) {
+    } on StorageException catch (err, stackTrace) {
       final error = NotifyException(
         type: ExceptionType.storage,
         message: err.error.toString(),
@@ -94,7 +91,7 @@ final class AuthRepository implements IAuthRepository {
     try {
       final result = await _secureStorage.read(key: ConstStorage.accessToken);
       return result;
-    } on SecureStorageException catch (err, stackTrace) {
+    } on StorageException catch (err, stackTrace) {
       final error = NotifyException(
         type: ExceptionType.storage,
         message: err.error.toString(),
@@ -110,7 +107,7 @@ final class AuthRepository implements IAuthRepository {
         key: ConstStorage.accessToken,
         value: accessToken,
       );
-    } on SecureStorageException catch (err, stackTrace) {
+    } on StorageException catch (err, stackTrace) {
       final error = NotifyException(
         type: ExceptionType.storage,
         message: err.error.toString(),
