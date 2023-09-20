@@ -16,4 +16,15 @@ enum TodoFilter {
         return context.l10n.enumTodoFilterCompleted;
     }
   }
+
+  String get toPath {
+    switch (this) {
+      case TodoFilter.all:
+        return '0';
+      case TodoFilter.active:
+        return '1';
+      case TodoFilter.completed:
+        return '2';
+    }
+  }
 }

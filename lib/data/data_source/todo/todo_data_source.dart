@@ -29,7 +29,10 @@ final class TodoDataSource implements ITodoDataSource {
 
   @override
   Future<TodoGetAllResponse> getAllTodo(TodoFilter filter) {
-    throw UnimplementedError();
+    return _client.get<TodoGetAllResponse, TodoGetAllResponse>(
+      ConstAPI.getAllTodo,
+      responseModel: const TodoGetAllResponse(),
+    );
   }
 
   @override

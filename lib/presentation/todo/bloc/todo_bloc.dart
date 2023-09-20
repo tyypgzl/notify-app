@@ -25,32 +25,19 @@ final class TodoBloc extends Bloc<TodoEvent, TodoState> {
   FutureOr<void> _onTodosFetched(
     TodosFetched event,
     Emitter<TodoState> emit,
-  ) {
-    final todos = <TodoModel>[
-      TodoModel(
-        activity: TodoActivity.active,
-        colorNumber: 0,
-        createdTime: DateTime.now(),
-        description: 'Desc1',
-        id: '1',
-        title: 'Title1',
-      ),
-      TodoModel(
-        activity: TodoActivity.active,
-        colorNumber: 1,
-        createdTime: DateTime.now(),
-        description: 'Desc2',
-        id: '2',
-        title: 'Title2',
-      ),
-    ];
-    emit(
-      state.copyWith(
-        todos: todos,
-      ),
-    );
-
-    event.refreshCompleter?.complete();
+  ) async {
+    try {
+      final response = await _todoRepository.getAllTodo(state.filter);
+      event.refreshCompleter?.complete();
+      emit(
+        state.copyWith(
+          todos: response.todos,
+        ),
+      );
+    } on NotifyException catch (error, stackTrace) {
+      event.refreshCompleter?.completeError(error, stackTrace);
+      addError(error, stackTrace);
+    }
   }
 
   FutureOr<void> _onFilterSheetOpened(

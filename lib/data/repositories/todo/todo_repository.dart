@@ -30,8 +30,13 @@ final class TodoRepository implements ITodoRepository {
   }
 
   @override
-  Future<TodoGetAllResponse> getAllTodo(TodoFilter filter) {
-    throw UnimplementedError();
+  Future<TodoGetAllResponse> getAllTodo(TodoFilter filter) async {
+    try {
+      final result = await _dataSource.getAllTodo(filter);
+      return result;
+    } on CookieException catch (error, stackTrace) {
+      Error.throwWithStackTrace(NotifyException.fromCookie(error), stackTrace);
+    }
   }
 
   @override
