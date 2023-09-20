@@ -1,7 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/todo.dart';
 import 'package:notify/presentation/todo/todo.dart';
 import 'package:notify/utils/extensions/extensions.dart';
@@ -35,11 +34,11 @@ final class FilterSheetWidget extends StatelessWidget {
               return ListTile(
                 contentPadding: const AppPadding.zero(),
                 splashColor: Colors.transparent,
-                onTap: () {
-                  context.popRoute(TodoFilter.values.elementAt(index));
-                },
+                onTap: () => context.popRoute(
+                  TodoFilter.values.elementAt(index),
+                ),
                 title: Text(
-                  TodoFilter.values.elementAt(index).name,
+                  TodoFilter.values.elementAt(index).toLocalize(context),
                   style: context.textTheme.bodyLarge,
                 ),
                 trailing: Radio(
