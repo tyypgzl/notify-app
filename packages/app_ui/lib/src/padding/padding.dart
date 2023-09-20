@@ -7,7 +7,7 @@ final class AppPadding extends EdgeInsets {
 
   const AppPadding.page() : super.symmetric(horizontal: 12);
   const AppPadding.sheet()
-      : super.only(left: 16, right: 16, top: 12, bottom: 12);
+      : super.only(left: 16, right: 16, top: 0, bottom: 12);
   const AppPadding.zero() : super.all(0);
 
   const AppPadding.x4() : super.symmetric(horizontal: 4);

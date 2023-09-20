@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/todo.dart';
+import 'package:notify/presentation/todo/todo.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -20,18 +21,24 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ).add(const AppPadding.sheet()),
+        bottom: MediaQuery.viewInsetsOf(context).bottom +
+            MediaQuery.paddingOf(context).bottom,
+      ).add(const AppPadding.sheet()).add(
+            const AppPadding.x12(),
+          ),
       child: Form(
         key: formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SheetTitle(
+              child: Text('Add'),
+            ),
+            const SizedBox(height: 8),
             Padding(
-              padding: const AppPadding.y12(),
+              padding: const AppPadding.y16(),
               child: TextFormField(
                 autofocus: true,
-                focusNode: todoFocusNode,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -44,18 +51,16 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                   hintText: 'e.g., Read the Atomic habits book',
                 ),
                 controller: todoController,
-                onEditingComplete: tagsFocusNode.requestFocus,
               ),
             ),
             Padding(
-              padding: const AppPadding.y12(),
+              padding: const AppPadding.y16(),
               child: TextField(
-                focusNode: tagsFocusNode,
                 decoration: const InputDecoration(
-                  hintText: 'Tags,Priority',
+                  hintText: 'Description',
                   prefixIcon: Icon(FontAwesomeIcons.tag),
                 ),
-                controller: tagsController,
+                controller: descController,
                 onEditingComplete: () {
                   if (formKey.currentState?.validate() ?? false) {
                     final todo = TodoModel(
@@ -63,6 +68,7 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                       colorNumber: Colors.primaries.indexOf(
                         _selectedColor ?? Colors.grey,
                       ),
+                      description: descController.text,
                       activity: TodoActivity.active,
                       id: const Uuid().v1(),
                       createdTime: DateTime.now(),
@@ -72,51 +78,6 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                 },
               ),
             ),
-            if (tagsFocusNode.hasFocus)
-              SizedBox(
-                height: 40,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(4),
-                  children: List.generate(
-                    5,
-                    (index) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: SizedBox(
-                        height: 36,
-                        child: FilterChip(
-                          showCheckmark: false,
-                          label: Text(
-                            TodoPriority.values
-                                .elementAt(index)
-                                .toLocalize(context),
-                          ),
-                          padding: const EdgeInsets.all(6),
-                          pressElevation: 1,
-                          selected: _selectedTodo ==
-                              TodoPriority.values.elementAt(index),
-                          onSelected: (value) {
-                            setState(() {
-                              _selectedTodo =
-                                  TodoPriority.values.elementAt(index);
-
-                              tagsController
-                                ..text = TodoPriority.values
-                                    .elementAt(index)
-                                    .toLocalize(context)
-                                ..selection = TextSelection.fromPosition(
-                                  TextPosition(
-                                    offset: tagsController.text.length,
-                                  ),
-                                );
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             SizedBox(
               height: 44,
               child: ListView(
@@ -164,34 +125,24 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
 
 mixin TodoValidationMixin on State<AddTodoWidgetSheet> {
   late final TextEditingController todoController;
-  late final TextEditingController tagsController;
-  late final FocusNode todoFocusNode;
-  late final FocusNode tagsFocusNode;
+  late final TextEditingController descController;
   late final GlobalKey<FormState> formKey;
 
-  TodoPriority? _selectedTodo;
   MaterialColor? _selectedColor;
 
   @override
   void initState() {
     super.initState();
     todoController = TextEditingController();
-    tagsController = TextEditingController();
-    todoFocusNode = FocusNode();
-    tagsFocusNode = FocusNode();
+    descController = TextEditingController();
     formKey = GlobalKey<FormState>();
-    tagsFocusNode.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     todoController.dispose();
-    tagsController.dispose();
-    todoFocusNode.dispose();
-    tagsFocusNode.dispose();
+    descController.dispose();
   }
 
   String? emptyValid({
