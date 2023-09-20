@@ -9,4 +9,5 @@ abstract interface class IAuthRepository {
   Future<String?> readOnboardStatus();
   Future<String?> readAccessToken();
   Future<void> saveAccessToken(String? accessToken);
+  void setToken(String? token);
 }

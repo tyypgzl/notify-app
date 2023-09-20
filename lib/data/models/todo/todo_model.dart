@@ -1,7 +1,10 @@
+import 'package:cookie_client/cookie_client.dart';
 import 'package:equatable/equatable.dart';
 import 'package:notify/data/models/todo/todo.dart';
 
-final class TodoModel with EquatableMixin {
+final class TodoModel
+    with EquatableMixin
+    implements CookieNetworkModel<TodoModel> {
   const TodoModel({
     this.id,
     this.title,
@@ -10,6 +13,18 @@ final class TodoModel with EquatableMixin {
     this.activity,
     this.createdTime,
   });
+
+  factory TodoModel.fromJson(Map<String, dynamic> json) {
+    return TodoModel(
+      id: json['id'] as String?,
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      colorNumber: json['colorNumber'] as int?,
+      activity: TodoActivity.values.elementAt(json['activity'] as int? ?? 0),
+      createdTime: DateTime.tryParse(json['createdTime'] as String? ?? ''),
+    );
+  }
+
   final String? id;
   final String? title;
   final String? description;
@@ -27,6 +42,7 @@ final class TodoModel with EquatableMixin {
         createdTime,
       ];
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -38,14 +54,6 @@ final class TodoModel with EquatableMixin {
     };
   }
 
-  TodoModel fromJson(Map<String, dynamic> json) {
-    return TodoModel(
-      id: json['id'] as String?,
-      title: json['title'] as String?,
-      description: json['description'] as String?,
-      colorNumber: json['colorNumber'] as int?,
-      activity: TodoActivity.values.elementAt(json['activity'] as int? ?? 0),
-      createdTime: DateTime.tryParse(json['createdTime'] as String? ?? ''),
-    );
-  }
+  @override
+  TodoModel fromJson(Map<String, dynamic> json) => TodoModel.fromJson(json);
 }

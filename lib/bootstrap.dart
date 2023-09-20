@@ -9,8 +9,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/app/observer/bloc_observer.dart';
 import 'package:notify/app/view/app.dart';
+import 'package:notify/data/data_source/auth/auth.dart';
+import 'package:notify/data/data_source/todo/todo.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
-import 'package:notify/data/services/auth/auth.dart';
+import 'package:notify/data/repositories/todo/todo.dart';
 import 'package:notify/utils/enum/flavor.dart';
 import 'package:notify/utils/flavor/flavor_config.dart';
 import 'package:notify/utils/locator/service_locator.dart';
@@ -41,11 +43,18 @@ Future<void> bootstrap(Flavor flavor) async {
       providers: [
         RepositoryProvider<IAuthRepository>(
           create: (context) => AuthRepository(
-            authService: AuthService(
+            authDataSource: AuthDataSource(
               client: getIt<CookieClient>(),
             ),
             persistentStorage: getIt<PersistentStorage>(),
             secureStorage: getIt<SecureStorage>(),
+          ),
+        ),
+        RepositoryProvider<ITodoRepository>(
+          create: (context) => TodoRepository(
+            dataSource: TodoDataSource(
+              client: getIt<CookieClient>(),
+            ),
           ),
         ),
       ],

@@ -19,4 +19,8 @@ final class AddTodoSheetOpened extends TodoEvent {
   final AsyncValueGetter<TodoModel?> onSheetOpened;
 }
 
-final class TodosFetched extends TodoEvent {}
+final class TodosFetched extends TodoEvent {
+  const TodosFetched({this.refreshCompleter});
+
+  final Completer<void>? refreshCompleter;
+}

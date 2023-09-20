@@ -64,6 +64,14 @@ class CookieClient {
     }
   }
 
+  void setToken(String? token) {
+    if (token != null) {
+      _dio.options.headers['Authorization'] = 'Bearer $token';
+    } else {
+      _dio.options.headers['Authorization'] = null;
+    }
+  }
+
   ///[Dio] Object for Network Request.
   ///The initialization is done in the constructor method.
   late final Dio _dio;

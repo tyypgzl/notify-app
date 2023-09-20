@@ -1,30 +1,30 @@
 import 'package:cookie_client/cookie_client.dart';
+import 'package:notify/data/data_source/auth/auth.dart';
 import 'package:notify/data/models/auth/login/login.dart';
 import 'package:notify/data/models/auth/register/register_request.dart';
 import 'package:notify/data/models/auth/register/register_response.dart';
 import 'package:notify/data/repositories/auth/auth.dart';
-import 'package:notify/data/services/auth/auth.dart';
 import 'package:notify/utils/constants/constants.dart';
 import 'package:notify/utils/exception/notify_exception.dart';
 import 'package:storage/storage.dart';
 
 final class AuthRepository implements IAuthRepository {
   const AuthRepository({
-    required IAuthService authService,
+    required IAuthDataSource authDataSource,
     required PersistentStorage persistentStorage,
     required SecureStorage secureStorage,
-  })  : _authService = authService,
+  })  : _authDataSource = authDataSource,
         _persistentStorage = persistentStorage,
         _secureStorage = secureStorage;
 
   final PersistentStorage _persistentStorage;
   final SecureStorage _secureStorage;
-  final IAuthService _authService;
+  final IAuthDataSource _authDataSource;
 
   @override
   Future<LoginResponse?> login(LoginRequest request) async {
     try {
-      final result = await _authService.login(request);
+      final result = await _authDataSource.login(request);
       return result;
     } on CookieException catch (err, stackTrace) {
       Error.throwWithStackTrace(
@@ -41,7 +41,7 @@ final class AuthRepository implements IAuthRepository {
   @override
   Future<RegisterResponse?> register(RegisterRequest request) async {
     try {
-      final result = await _authService.register(request);
+      final result = await _authDataSource.register(request);
       return result;
     } on CookieException catch (err, stackTrace) {
       Error.throwWithStackTrace(
@@ -103,6 +103,7 @@ final class AuthRepository implements IAuthRepository {
   @override
   Future<void> saveAccessToken(String? accessToken) async {
     try {
+      _authDataSource.setToken(accessToken);
       await _secureStorage.write(
         key: ConstStorage.accessToken,
         value: accessToken,
@@ -115,4 +116,7 @@ final class AuthRepository implements IAuthRepository {
       Error.throwWithStackTrace(error, stackTrace);
     }
   }
+
+  @override
+  void setToken(String? token) => _authDataSource.setToken(token);
 }
