@@ -12,10 +12,9 @@ final class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registerBloc = context.read<RegisterBloc>();
-    return BlocConsumer<RegisterBloc, RegisterState>(
+    return BlocListener<RegisterBloc, RegisterState>(
       listenWhen: (previous, current) =>
           previous.snackBarInfo != current.snackBarInfo,
-      buildWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.snackBarInfo.showSnackBar) {
           showSnackBar(
@@ -26,10 +25,9 @@ final class RegisterView extends StatelessWidget {
           registerBloc.add(ResetRegisterSnackBar());
         }
       },
-      builder: (context, state) {
-        return LoadingWidget(
-          isLoading: state.isLoading,
-          child: Scaffold(
+      child: Stack(
+        children: [
+          Scaffold(
             appBar: AppBar(
               backgroundColor: context.colorScheme.background,
               systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -70,8 +68,16 @@ final class RegisterView extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
+          BlocBuilder<RegisterBloc, RegisterState>(
+            buildWhen: (previous, current) => previous.status != current.status,
+            builder: (context, state) => Positioned.fill(
+              child: LoadingWidget(
+                isLoading: state.isLoading,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

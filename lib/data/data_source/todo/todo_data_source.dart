@@ -23,20 +23,27 @@ final class TodoDataSource implements ITodoDataSource {
   }
 
   @override
-  Future<TodoResponse> deleteTodo(TodoModel todo) {
-    throw UnimplementedError();
+  Future<TodoResponse> deleteTodo(String? id) {
+    return _client.delete<TodoResponse, TodoResponse>(
+      '${ConstAPI.deleteTodo}/$id',
+      responseModel: const TodoResponse(),
+    );
   }
 
   @override
   Future<TodoGetAllResponse> getAllTodo(TodoFilter filter) {
     return _client.get<TodoGetAllResponse, TodoGetAllResponse>(
-      ConstAPI.getAllTodo,
+      '${ConstAPI.getAllTodo}?activity=${filter.index}',
       responseModel: const TodoGetAllResponse(),
     );
   }
 
   @override
   Future<TodoResponse> updateTodo(TodoModel todo) {
-    throw UnimplementedError();
+    return _client.put<TodoResponse, TodoResponse>(
+      ConstAPI.updateTodo,
+      data: todo.toJson(),
+      responseModel: const TodoResponse(),
+    );
   }
 }

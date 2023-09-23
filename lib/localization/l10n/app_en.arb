@@ -62,7 +62,7 @@
     "@_ENUMS": {
   },
   "enumTodoFilterAll": "All",
-  "enumTodoFilterActive": "Active",
-  "enumTodoFilterCompleted": "Completed"
+  "enumTodoFilterWaiting": "Waiting",
+  "enumTodoFilterDone": "Done"
   
 }

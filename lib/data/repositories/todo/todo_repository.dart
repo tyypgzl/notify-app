@@ -25,8 +25,13 @@ final class TodoRepository implements ITodoRepository {
   }
 
   @override
-  Future<TodoResponse> deleteTodo(TodoModel todo) {
-    throw UnimplementedError();
+  Future<TodoResponse> deleteTodo(String? id) async {
+    try {
+      final result = await _dataSource.deleteTodo(id);
+      return result;
+    } on CookieException catch (error, stackTrace) {
+      Error.throwWithStackTrace(NotifyException.fromCookie(error), stackTrace);
+    }
   }
 
   @override
@@ -40,7 +45,12 @@ final class TodoRepository implements ITodoRepository {
   }
 
   @override
-  Future<TodoResponse> updateTodo(TodoModel todo) {
-    throw UnimplementedError();
+  Future<TodoResponse> updateTodo(TodoModel todo) async {
+    try {
+      final result = await _dataSource.updateTodo(todo);
+      return result;
+    } on CookieException catch (error, stackTrace) {
+      Error.throwWithStackTrace(NotifyException.fromCookie(error), stackTrace);
+    }
   }
 }

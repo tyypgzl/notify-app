@@ -16,22 +16,22 @@ void showSnackBar({
     SnackBar(
       onVisible: onVisible,
       elevation: 16,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
+        side: BorderSide(
+          color: Theme.of(context).dividerColor,
+          width: 2,
+        ),
       ),
       duration: duration ?? const Duration(seconds: 3),
       content: Row(
         children: [
           Expanded(
-            child: IconTheme(
-              data: IconThemeData(
-                color: type.color,
-                size: 32,
-              ),
-              child: Icon(
-                type.icon,
-              ),
+            child: Icon(
+              type.icon,
+              color: type.color,
+              size: 30,
             ),
           ),
           const SizedBox(width: 8),
@@ -39,9 +39,8 @@ void showSnackBar({
             flex: 7,
             child: Text(
               content,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
-                    fontWeight: FontWeight.w500,
                     letterSpacing: 0,
                   ),
             ),

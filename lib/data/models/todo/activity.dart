@@ -1,10 +1,9 @@
 enum TodoActivity {
-  active,
-  completed;
+  waiting,
+  done;
 
-  bool get boolValue => this == TodoActivity.active;
+  bool get boolValue => this == TodoActivity.done;
 
-  TodoActivity get reverse => this == TodoActivity.active
-      ? TodoActivity.completed
-      : TodoActivity.active;
+  TodoActivity get reverse =>
+      this == TodoActivity.waiting ? TodoActivity.done : TodoActivity.waiting;
 }

@@ -4,53 +4,36 @@ import 'package:notify/data/models/todo/todo.dart';
 import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
-final class AnimatedCircleCheck extends StatefulWidget {
+final class AnimatedCircleCheck extends StatelessWidget {
   const AnimatedCircleCheck({
     super.key,
     required this.onChanged,
+    required this.activity,
   });
 
-  final void Function(TodoActivity value) onChanged;
-
-  @override
-  State<AnimatedCircleCheck> createState() => _AnimatedCircleCheckState();
-}
-
-final class _AnimatedCircleCheckState extends State<AnimatedCircleCheck>
-    with SingleTickerProviderStateMixin {
-  late TodoActivity _activity;
-
-  @override
-  void initState() {
-    super.initState();
-    _activity = TodoActivity.completed;
-  }
+  final ValueSetter<TodoActivity>? onChanged;
+  final TodoActivity activity;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          _activity = _activity.reverse;
-          widget.onChanged(_activity);
-        });
-      },
+      onTap: () => onChanged?.call(activity.reverse),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 100),
         width: 34,
         height: 34,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: _activity.boolValue
+          color: activity.boolValue
               ? Colors.green.shade400
               : context.colorScheme.background,
           border: Border.all(
-            color: _activity.boolValue
+            color: activity.boolValue
                 ? Colors.green.shade400
                 : context.colorScheme.onBackground.withOpacity(.4),
           ),
         ),
-        child: _activity.boolValue
+        child: activity.boolValue
             ? const Center(
                 child: Icon(
                   FontAwesomeIcons.check,

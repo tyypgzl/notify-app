@@ -24,3 +24,18 @@ final class TodosFetched extends TodoEvent {
 
   final Completer<void>? refreshCompleter;
 }
+
+final class TodoActivityChanged extends TodoEvent {
+  const TodoActivityChanged({required this.todo, required this.activity});
+
+  final TodoModel todo;
+  final TodoActivity activity;
+}
+
+final class TodoDeleted extends TodoEvent {
+  const TodoDeleted({required this.todoId});
+
+  final String? todoId;
+}
+
+final class ResetTodoSnackBar extends TodoEvent {}

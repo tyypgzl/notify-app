@@ -45,6 +45,17 @@ final class SnackBarInfo {
   const SnackBarInfo.init()
       : this(type: SnackBarType.info, showSnackBar: false);
 
+  const SnackBarInfo.error({String? message})
+      : this(type: SnackBarType.error, showSnackBar: true, message: message);
+
+  const SnackBarInfo.success({String? message})
+      : this(type: SnackBarType.success, showSnackBar: true, message: message);
+
+  const SnackBarInfo.info({String? message})
+      : this(type: SnackBarType.info, showSnackBar: true, message: message);
+
+  const SnackBarInfo.warning({String? message})
+      : this(type: SnackBarType.warning, showSnackBar: true, message: message);
   final String? message;
   final SnackBarType type;
   final bool showSnackBar;

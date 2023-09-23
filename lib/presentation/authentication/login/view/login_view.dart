@@ -11,7 +11,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginBloc = context.read<LoginBloc>();
-    return BlocConsumer<LoginBloc, LoginState>(
+    return BlocListener<LoginBloc, LoginState>(
       listenWhen: (previous, current) =>
           previous.snackBarInfo != current.snackBarInfo,
       listener: (context, loginState) {
@@ -24,22 +24,20 @@ class LoginView extends StatelessWidget {
           loginBloc.add(ResetLoginSnackBar());
         }
       },
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            toolbarHeight: kToolbarHeight,
-            backgroundColor: context.colorScheme.background,
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
-            leading: AdaptiveIconButton(
-              icon: Icons.arrow_back_ios_new,
-              color: context.colorScheme.onBackground,
-              onPressed: () => loginBloc.add(LoginBackButtonPressed()),
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              toolbarHeight: kToolbarHeight,
+              backgroundColor: context.colorScheme.background,
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
+              leading: AdaptiveIconButton(
+                icon: Icons.arrow_back_ios_new,
+                color: context.colorScheme.onBackground,
+                onPressed: () => loginBloc.add(LoginBackButtonPressed()),
+              ),
             ),
-          ),
-          body: LoadingWidget(
-            isLoading: state.isLoading,
-            child: Form(
+            body: Form(
               key: loginBloc.formKey,
               child: SingleChildScrollView(
                 padding: const AppPadding.page(),
@@ -74,8 +72,16 @@ class LoginView extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
+          BlocBuilder<LoginBloc, LoginState>(
+            buildWhen: (previous, current) => previous.status != current.status,
+            builder: (context, state) => Positioned.fill(
+              child: LoadingWidget(
+                isLoading: state.isLoading,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -69,7 +69,7 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                         _selectedColor ?? Colors.grey,
                       ),
                       description: descController.text,
-                      activity: TodoActivity.active,
+                      activity: TodoActivity.waiting,
                       id: const Uuid().v1(),
                       createdTime: DateTime.now(),
                     );

@@ -61,8 +61,8 @@
   "passwordValidationMessage": "Parolanız kolayca tahmin edilir. Parolanızı daha uzun yapmayı deneyin. Büyük ve küçük harfleri birleştirin. Özel karakterler ve sayılar ekleyin. Basit kelimeler ve isimler kullanmayın.",
     "@_ENUMS": {
   },
-"enumTodoFilterAll": "Hepsi",
-  "enumTodoFilterActive": "Aktif",
-  "enumTodoFilterCompleted": "Tamamlanmış"
+  "enumTodoFilterAll": "Hepsi",
+  "enumTodoFilterWaiting": "Bekliyor",
+  "enumTodoFilterDone": "Tamamlanmış"
 }
 

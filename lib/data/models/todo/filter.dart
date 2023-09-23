@@ -3,17 +3,17 @@ import 'package:notify/utils/extensions/extensions.dart';
 
 enum TodoFilter {
   all,
-  active,
-  completed;
+  waiting,
+  done;
 
   String toLocalize(BuildContext context) {
     switch (this) {
-      case TodoFilter.active:
-        return context.l10n.enumTodoFilterActive;
+      case TodoFilter.waiting:
+        return context.l10n.enumTodoFilterWaiting;
       case TodoFilter.all:
         return context.l10n.enumTodoFilterAll;
-      case TodoFilter.completed:
-        return context.l10n.enumTodoFilterCompleted;
+      case TodoFilter.done:
+        return context.l10n.enumTodoFilterDone;
     }
   }
 
@@ -21,9 +21,9 @@ enum TodoFilter {
     switch (this) {
       case TodoFilter.all:
         return '0';
-      case TodoFilter.active:
+      case TodoFilter.waiting:
         return '1';
-      case TodoFilter.completed:
+      case TodoFilter.done:
         return '2';
     }
   }

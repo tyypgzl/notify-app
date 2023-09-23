@@ -20,7 +20,7 @@ export 'src/widgets/auth_clickable_text_spans.dart';
 export 'src/widgets/auth_text_field.dart';
 export 'src/widgets/error_page.dart';
 export 'src/widgets/loading_widget.dart';
-export 'src/widgets/pen_anim_widget.dart';
+export 'src/widgets/animation_widget.dart';
 export 'src/widgets/snack_bar/snack_bar.dart';
 export 'src/widgets/snack_bar/snack_bar_info.dart';
 export 'src/widgets/text_divider.dart';

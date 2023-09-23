@@ -50,7 +50,7 @@ final class StartView extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Spacer(flex: 2),
-              const PenAnimWidget(),
+              AnimationWidget(asset: Assets.animations.lotPen),
               const Spacer(flex: 2),
               AuthButton.text(
                 title: context.l10n.startLogin,

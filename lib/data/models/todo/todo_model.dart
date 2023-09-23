@@ -1,5 +1,6 @@
 import 'package:cookie_client/cookie_client.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:notify/data/models/todo/todo.dart';
 
 final class TodoModel
@@ -56,4 +57,22 @@ final class TodoModel
 
   @override
   TodoModel fromJson(Map<String, dynamic> json) => TodoModel.fromJson(json);
+
+  TodoModel copyWith({
+    String? id,
+    String? title,
+    String? description,
+    int? colorNumber,
+    TodoActivity? activity,
+    DateTime? createdTime,
+  }) {
+    return TodoModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      colorNumber: colorNumber ?? this.colorNumber,
+      activity: activity ?? this.activity,
+      createdTime: createdTime ?? this.createdTime,
+    );
+  }
 }

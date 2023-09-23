@@ -17,6 +17,7 @@ dependencies:
   #UI
   smooth_page_indicator: ^1.0.1
   font_awesome_flutter: ^10.5.0
+  flutter_slidable: ^3.0.0
 
   #Utils
   uuid: ^3.0.7
