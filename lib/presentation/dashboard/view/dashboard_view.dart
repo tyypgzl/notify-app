@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/router/app_router.dart';
+import 'package:notify/utils/extensions/extensions.dart';
 
 @immutable
 final class DashboardView extends StatelessWidget {
@@ -13,30 +14,20 @@ final class DashboardView extends StatelessWidget {
     return AutoTabsScaffold(
       routes: const [
         TodoRoute(),
-        TaskRoute(),
-        NoteRoute(),
         SettingsRoute(),
       ],
       bottomNavigationBuilder: (context, tabsRouter) {
         return AdaptiveTabBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.checkDouble, size: 25),
-              label: 'Todo',
+              icon: const Icon(FontAwesomeIcons.checkDouble, size: 25),
+              label: context.l10n.todoTitle,
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.cubesStacked, size: 25),
-              label: 'Task',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.noteSticky, size: 25),
-              label: 'Note',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.gear, size: 25),
-              label: 'Settings',
+              icon: const Icon(FontAwesomeIcons.gear, size: 25),
+              label: context.l10n.settingTitle,
             ),
           ],
         );

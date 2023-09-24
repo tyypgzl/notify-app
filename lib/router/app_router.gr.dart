@@ -21,16 +21,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DashboardPage(),
       );
     },
+    LanguageRoute.name: (routeData) {
+      return AutoRoutePage<Locale>(
+        routeData: routeData,
+        child: const LanguageView(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LoginPage(),
-      );
-    },
-    NoteRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const NotePage(),
       );
     },
     OnboardRoute.name: (routeData) {
@@ -51,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SettingsPage(),
       );
     },
+    SettingsWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsWrapperPage(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -63,10 +69,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const StartPage(),
       );
     },
-    TaskRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+    ThemeRoute.name: (routeData) {
+      return AutoRoutePage<ThemeMode>(
         routeData: routeData,
-        child: const TaskView(),
+        child: const ThemeView(),
       );
     },
     TodoRoute.name: (routeData) {
@@ -93,6 +99,20 @@ class DashboardRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LanguageView]
+class LanguageRoute extends PageRouteInfo<void> {
+  const LanguageRoute({List<PageRouteInfo>? children})
+      : super(
+          LanguageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LanguageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -102,20 +122,6 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [NotePage]
-class NoteRoute extends PageRouteInfo<void> {
-  const NoteRoute({List<PageRouteInfo>? children})
-      : super(
-          NoteRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NoteRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -163,6 +169,20 @@ class SettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SettingsWrapperPage]
+class SettingsWrapperRoute extends PageRouteInfo<void> {
+  const SettingsWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsWrapperRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashPage]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -191,15 +211,15 @@ class StartRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TaskView]
-class TaskRoute extends PageRouteInfo<void> {
-  const TaskRoute({List<PageRouteInfo>? children})
+/// [ThemeView]
+class ThemeRoute extends PageRouteInfo<void> {
+  const ThemeRoute({List<PageRouteInfo>? children})
       : super(
-          TaskRoute.name,
+          ThemeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'TaskRoute';
+  static const String name = 'ThemeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

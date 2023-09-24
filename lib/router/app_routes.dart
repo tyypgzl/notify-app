@@ -1,18 +1,21 @@
 enum AppRoutes {
-  splash(path: '/', name: 'splash'),
-  onboard(path: '/onboard', name: 'onboard'),
-  start(path: '/start', name: 'start'),
-  login(path: '/login', name: 'login'),
-  register(path: '/register', name: 'register'),
-  dashboard(path: '/dashboard', name: 'dashboard'),
+  splash(path: '/'),
+  onboard(path: '/onboard'),
+  start(path: '/start'),
+  login(path: '/login'),
+  register(path: '/register'),
+  dashboard(path: '/dashboard'),
   // Sub-Path
-  todo(path: 'todo', name: 'todo'),
-  task(path: 'task', name: 'task'),
-  note(path: 'note', name: 'note'),
-  settings(path: 'settings', name: 'settings');
+  todo(path: 'todo'),
+  task(path: 'task'),
+  note(path: 'note'),
+  settingsWrapper(path: 'settings'),
+  settings(path: ''),
+  lanugage(path: 'language'),
+  theme(path: 'theme'),
+  ;
 
-  const AppRoutes({required this.path, required this.name});
+  const AppRoutes({required this.path});
 
   final String path;
-  final String name;
 }

@@ -35,12 +35,10 @@ final class AppCubit extends HydratedCubit<AppState> {
     );
   }
 
-  void changeTheme() {
+  void changeTheme(ThemeMode? themeMode) {
     emit(
       state.copyWith(
-        themeMode: state.themeMode == ThemeMode.light
-            ? ThemeMode.dark
-            : ThemeMode.light,
+        themeMode: themeMode,
       ),
     );
   }

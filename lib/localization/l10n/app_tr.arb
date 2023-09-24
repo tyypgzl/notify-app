@@ -46,17 +46,11 @@
     "@_TODO": {
   },
   "todoTitle": "Todo",
-    "addTodoSheetTitle":"Ekle",
+  "addTodoSheetTitle":"Ekle",
   "addTodoSheetFieldErrorMessage":"Lütfen bir metin girin",
   "addTodoSheetFieldHintText":"örneğin, Atomik alışkanlıklar kitabını oku",
   "addTodoSheetDescFieldHintText":"Açıklama",
-    "filterSheetTitle":"Filtrele",
-  "@_TASK": {
-  },
-  "taskTitle": "Görevler",
-  "@_NOTE": {
-  },
-  "noteTitle": "Not",
+  "filterSheetTitle":"Filtrele",
   "@_SETTİNGS": {
   },
   "settingTitle": "Ayarlar",

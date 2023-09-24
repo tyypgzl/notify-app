@@ -9,6 +9,8 @@ class AppState extends Equatable {
   final Locale locale;
   final ThemeMode themeMode;
 
+  bool get isDark => themeMode == ThemeMode.dark;
+
   @override
   List<Object?> get props => [locale, themeMode];
 

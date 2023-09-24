@@ -119,4 +119,20 @@ final class AuthRepository implements IAuthRepository {
 
   @override
   void setToken(String? token) => _authDataSource.setToken(token);
+
+  @override
+  Future<void> logout() async {
+    try {
+      _authDataSource.setToken(null);
+      await _secureStorage.delete(
+        key: ConstStorage.accessToken,
+      );
+    } on StorageException catch (err, stackTrace) {
+      final error = NotifyException(
+        type: ExceptionType.storage,
+        message: err.error.toString(),
+      );
+      Error.throwWithStackTrace(error, stackTrace);
+    }
+  }
 }
