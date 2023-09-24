@@ -46,6 +46,12 @@
     "@_TODO": {
   },
   "todoTitle": "Todo",
+  "addTodoSheetTitle":"Add",
+  "addTodoSheetFieldErrorMessage":"Please enter some text",
+  "addTodoSheetFieldHintText":"e.g., Read the Atomic habits book",
+  "addTodoSheetDescFieldHintText":"Description",
+  "filterSheetTitle":"Filter",
+
   "@_TASK": {
   },
   "taskTitle": "Task",

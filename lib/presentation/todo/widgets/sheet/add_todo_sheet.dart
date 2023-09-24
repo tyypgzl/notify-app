@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/data/models/todo/todo.dart';
 import 'package:notify/presentation/todo/todo.dart';
+import 'package:notify/utils/extensions/context_extension.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -19,6 +20,7 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
     with TodoValidationMixin {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.viewInsetsOf(context).bottom +
@@ -31,8 +33,8 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SheetTitle(
-              child: Text('Add'),
+            SheetTitle(
+              child: Text(l10n.addTodoSheetTitle),
             ),
             const SizedBox(height: 8),
             Padding(
@@ -44,11 +46,11 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) => emptyValid(
                   value: value,
-                  errorMessage: 'Please enter some text',
+                  errorMessage: l10n.addTodoSheetFieldErrorMessage,
                 ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(FontAwesomeIcons.check),
-                  hintText: 'e.g., Read the Atomic habits book',
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(FontAwesomeIcons.check),
+                  hintText: l10n.addTodoSheetFieldHintText,
                 ),
                 controller: todoController,
               ),
@@ -56,9 +58,9 @@ final class _AddTodoWidgetSheetState extends State<AddTodoWidgetSheet>
             Padding(
               padding: const AppPadding.y16(),
               child: TextField(
-                decoration: const InputDecoration(
-                  hintText: 'Description',
-                  prefixIcon: Icon(FontAwesomeIcons.tag),
+                decoration: InputDecoration(
+                  hintText: l10n.addTodoSheetDescFieldHintText,
+                  prefixIcon: const Icon(FontAwesomeIcons.tag),
                 ),
                 controller: descController,
                 onEditingComplete: () {

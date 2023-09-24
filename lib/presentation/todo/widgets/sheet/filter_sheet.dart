@@ -22,8 +22,8 @@ final class FilterSheetWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SheetTitle(
-            child: Text('Filter'),
+          SheetTitle(
+            child: Text(context.l10n.filterSheetTitle),
           ),
           const SizedBox(height: 20),
           ListView.builder(
