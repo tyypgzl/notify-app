@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/router/app_router.dart';
+import 'package:notify/utils/extensions/context_extension.dart';
 import 'package:notify/utils/locator/service_locator.dart';
 
 @immutable
@@ -43,7 +44,7 @@ final class _AppState extends State<App> with WidgetsBindingObserver {
       builder: (context, appState) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          title: AppConstants.name,
+          onGenerateTitle: (context) => context.l10n.title,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: appState.locale,
           localizationsDelegates: const [
