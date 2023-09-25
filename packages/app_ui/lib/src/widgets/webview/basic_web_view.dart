@@ -29,49 +29,51 @@ class _BasicWebViewState extends State<BasicWebView> {
   void initState() {
     super.initState();
 
-    late final PlatformWebViewControllerCreationParams params;
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      params = WebKitWebViewControllerCreationParams(
-        allowsInlineMediaPlayback: true,
-        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
-      );
-    } else if (WebViewPlatform.instance is AndroidWebViewPlatform) {
-      params = AndroidWebViewControllerCreationParams();
-    } else {
-      params = const PlatformWebViewControllerCreationParams();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      late final PlatformWebViewControllerCreationParams params;
+      if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+        params = WebKitWebViewControllerCreationParams(
+          allowsInlineMediaPlayback: true,
+          mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+        );
+      } else if (WebViewPlatform.instance is AndroidWebViewPlatform) {
+        params = AndroidWebViewControllerCreationParams();
+      } else {
+        params = const PlatformWebViewControllerCreationParams();
+      }
 
-    controller = WebViewController.fromPlatformCreationParams(params);
+      controller = WebViewController.fromPlatformCreationParams(params);
 // ···
-    if (controller.platform is AndroidWebViewController) {
-      AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
-    }
+      if (controller.platform is AndroidWebViewController) {
+        AndroidWebViewController.enableDebugging(true);
+        (controller.platform as AndroidWebViewController)
+            .setMediaPlaybackRequiresUserGesture(false);
+      }
 
-    controller
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.white)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageStarted: (url) {
-            setState(() {
-              _isShowProgressBar = true;
-            });
-          },
-          onPageFinished: (url) {
-            setState(() {
-              _isShowProgressBar = false;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              _progressValue = progress;
-            });
-          },
-        ),
-      )
-      ..loadRequest(widget.uri);
+      controller
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setBackgroundColor(Colors.white)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageStarted: (url) {
+              setState(() {
+                _isShowProgressBar = true;
+              });
+            },
+            onPageFinished: (url) {
+              setState(() {
+                _isShowProgressBar = false;
+              });
+            },
+            onProgress: (progress) {
+              setState(() {
+                _progressValue = progress;
+              });
+            },
+          ),
+        )
+        ..loadRequest(widget.uri);
+    });
   }
 
   @override
@@ -106,11 +108,8 @@ class _BasicWebViewState extends State<BasicWebView> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: WebViewWidget(
-              controller: controller,
-            ),
+          WebViewWidget(
+            controller: controller,
           ),
         ],
       ),

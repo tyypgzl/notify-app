@@ -53,7 +53,19 @@
   "filterSheetTitle":"Filtrele",
   "@_SETTİNGS": {
   },
-  "settingTitle": "Ayarlar",
+  "settingsTitle": "Ayarlar",
+  "settingsLanguage": "Dil",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageTurkish": "Türkçe",
+  "settingsThemeDark": "Koyu",
+  "settingsThemeLight": "Açık",
+  "settingsThemeSystem": "Sistem",
+  "settingsTheme": "Tema",
+  "settingsLegal": "Yasal",
+  "settingsTermAndCondition": "Şartlar & Koşullar",
+  "settingsPrivacyPolicy": "Gizlilik Politikası",
+  "settingsLogout": "Çıkış Yap",
+  
   "@_GENERAL": {
   },
   "emailValidationText": "Lütfen geçerli bir e-posta adresi giriniz.",

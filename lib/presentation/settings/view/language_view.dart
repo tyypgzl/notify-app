@@ -20,14 +20,14 @@ final class LanguageView extends StatelessWidget {
         subTiles: [
           SubSettingTile(
             showBottomDivider: false,
-            title: 'English',
+            title: context.l10n.settingsLanguageEnglish,
             titleStyle: context.textTheme.titleMedium,
             padding: const AppPadding.y8(),
             onTap: () => context.popRoute(L10n.en),
           ),
           SubSettingTile(
             showBottomDivider: false,
-            title: 'Türkçe',
+            title: context.l10n.settingsLanguageTurkish,
             padding: const AppPadding.y8(),
             titleStyle: context.textTheme.titleMedium,
             onTap: () => context.popRoute(L10n.tr),

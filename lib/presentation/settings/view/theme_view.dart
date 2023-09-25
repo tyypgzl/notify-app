@@ -12,28 +12,28 @@ final class ThemeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme'),
+        title: Text(context.l10n.settingsTheme),
       ),
       body: SettingsTile(
         padding: const AppPadding.zero(),
         subTiles: [
           SubSettingTile(
             showBottomDivider: false,
-            title: 'Dark',
+            title: context.l10n.settingsThemeDark,
             titleStyle: context.textTheme.titleMedium,
             padding: const AppPadding.y8(),
             onTap: () => context.popRoute(ThemeMode.dark),
           ),
           SubSettingTile(
             showBottomDivider: false,
-            title: 'Light',
+            title: context.l10n.settingsThemeLight,
             padding: const AppPadding.y8(),
             titleStyle: context.textTheme.titleMedium,
             onTap: () => context.popRoute(ThemeMode.light),
           ),
           SubSettingTile(
             showBottomDivider: false,
-            title: 'System',
+            title: context.l10n.settingsThemeSystem,
             padding: const AppPadding.y8(),
             titleStyle: context.textTheme.titleMedium,
             onTap: () => context.popRoute(ThemeMode.system),

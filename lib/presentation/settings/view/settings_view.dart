@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notify/app/cubit/app_cubit.dart';
 import 'package:notify/presentation/settings/settings.dart';
 import 'package:notify/router/app_router.dart';
+import 'package:notify/utils/extensions/context_extension.dart';
 
 @immutable
 final class SettingsView extends StatelessWidget {
@@ -22,12 +23,12 @@ final class SettingsView extends StatelessWidget {
               SettingsTile(
                 subTiles: [
                   SubSettingTile(
-                    title: 'Language',
+                    title: context.l10n.settingsLanguage,
                     leading: const Icon(
                       FontAwesomeIcons.globe,
                     ),
                     onTap: () async {
-                      final locale = await context.router.push<Locale>(
+                      final locale = await context.pushRoute<Locale>(
                         const LanguageRoute(),
                       );
                       if (context.mounted) {
@@ -36,14 +37,14 @@ final class SettingsView extends StatelessWidget {
                     },
                   ),
                   SubSettingTile(
-                    title: 'Theme Mode',
+                    title: context.l10n.settingsTheme,
                     leading: Icon(
                       Theme.of(context).brightness == Brightness.dark
                           ? FontAwesomeIcons.solidMoon
                           : FontAwesomeIcons.solidSun,
                     ),
                     onTap: () async {
-                      final themeMode = await context.router.push<ThemeMode>(
+                      final themeMode = await context.pushRoute<ThemeMode>(
                         const ThemeRoute(),
                       );
                       if (context.mounted) {
@@ -54,19 +55,29 @@ final class SettingsView extends StatelessWidget {
                 ],
               ),
               SettingsTile(
-                title: const Text('Legal'),
+                title: Text(context.l10n.settingsLegal),
                 subTiles: [
                   SubSettingTile(
-                    title: 'Terms of Service',
+                    title: context.l10n.settingsTermAndCondition,
                     leading: Icon(
                       IconDataSolid(FontAwesomeIcons.bookOpen.codePoint),
                     ),
+                    onTap: () => context.read<SettingsBloc>().add(
+                          TermAndConditionPressed(
+                            title: context.l10n.settingsTermAndCondition,
+                          ),
+                        ),
                   ),
                   SubSettingTile(
-                    title: 'Privacy Policy',
+                    title: context.l10n.settingsPrivacyPolicy,
                     leading: Icon(
                       IconDataSolid(FontAwesomeIcons.shieldHalved.codePoint),
                     ),
+                    onTap: () => context.read<SettingsBloc>().add(
+                          PrivacyPolicyPressed(
+                            title: context.l10n.settingsPrivacyPolicy,
+                          ),
+                        ),
                   ),
                 ],
               ),
@@ -74,13 +85,13 @@ final class SettingsView extends StatelessWidget {
                 subTiles: [
                   SubSettingTile(
                     isShowNavigationArrow: false,
-                    title: 'Log out',
+                    title: context.l10n.settingsLogout,
                     leading: const Icon(
                       FontAwesomeIcons.arrowRightFromBracket,
                     ),
-                    onTap: () {
-                      context.read<SettingsBloc>().add(LogoutButtonPressed());
-                    },
+                    onTap: () => context.read<SettingsBloc>().add(
+                          LogoutButtonPressed(),
+                        ),
                   ),
                 ],
               ),

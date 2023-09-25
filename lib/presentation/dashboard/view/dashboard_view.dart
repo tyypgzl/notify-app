@@ -27,7 +27,7 @@ final class DashboardView extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.gear, size: 25),
-              label: context.l10n.settingTitle,
+              label: context.l10n.settingsTitle,
             ),
           ],
         );

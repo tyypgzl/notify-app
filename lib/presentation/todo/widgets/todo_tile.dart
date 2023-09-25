@@ -71,6 +71,7 @@ class TodoTile extends StatelessWidget {
           ),
           title: Text(
             todo.title ?? '',
+            style: context.textTheme.bodyLarge,
           ),
           subtitle: Text(
             todo.description ?? '',

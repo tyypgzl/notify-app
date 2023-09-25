@@ -9,7 +9,7 @@ final class SettingsAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(context.l10n.settingTitle),
+      title: Text(context.l10n.settingsTitle),
     );
   }
 
