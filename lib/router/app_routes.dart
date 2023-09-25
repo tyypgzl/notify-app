@@ -7,8 +7,6 @@ enum AppRoutes {
   dashboard(path: '/dashboard'),
   // Sub-Path
   todo(path: 'todo'),
-  task(path: 'task'),
-  note(path: 'note'),
   settingsWrapper(path: 'settings'),
   settings(path: ''),
   lanugage(path: 'language'),
